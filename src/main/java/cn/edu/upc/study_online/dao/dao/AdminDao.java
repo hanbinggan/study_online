@@ -1,7 +1,7 @@
 package cn.edu.upc.study_online.dao.dao;
 
 import cn.edu.upc.study_online.dao.mapper.AdminMapper;
-import cn.edu.upc.study_online.dao.object.Admin;
+import cn.edu.upc.study_online.dao.object.AdminDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +13,11 @@ public class AdminDao {
     @Autowired
     private AdminMapper adminMapper;
 
-    public Long insert(Admin admin) {
-        return adminMapper.insert(admin);
+    public Long insert(AdminDo adminDo) {
+        return adminMapper.insert(adminDo);
     }
 
-    public Admin selectByName(String name){
+    public AdminDo selectByName(String name){
         return adminMapper.queryByName(name);
     }
 }

@@ -1,12 +1,13 @@
 package cn.edu.upc.study_online.dao.object;
 
+
 import org.springframework.stereotype.Component;
 
 /**
  * Created by songqiaolin on 2017/3/26.
  */
 @Component
-public class Admin {
+public class AdminDo {
     private Long id;
     private String name;
     private String password;
