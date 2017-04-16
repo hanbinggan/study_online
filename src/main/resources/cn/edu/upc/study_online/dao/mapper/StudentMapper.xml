@@ -6,12 +6,14 @@
         <result column="NAME" property="name" jdbcType="VARCHAR" javaType="String"/>
         <result column="PASSWORD" property="password" jdbcType="VARCHAR" javaType="String"/>
         <result column="EMAIL" property="email" jdbcType="VARCHAR" javaType="String"/>
-        <result column="CREATE_TIME" property="createTime" jdbcType="DATETIME" javaType="java.util.Date"/>
-        <result column="UPDATE_TIME" property="updateTime" jdbcType="DATETIME" javaType="java.util.Date"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     </resultMap>
+
     <sql id="BaseColumnList">
         ID, NAME, PASSWORD, EMAIL, CREATE_TIME, UPDATE_TIME
     </sql>
+
     <insert id="insert">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
             SELECT
@@ -24,13 +26,14 @@
         #{name, jdbcType=VARCHAR},
         #{password, jdbcType=VARCHAR},
         #{email, jdbcType=VARCHAR},
-        #{create_time, jdbcType=DATETIME},
-        #{update_time, jdbcType=DATETIME}
+        now(),
+        now()
         )
 
     </insert>
 
-    <select id="queryByName" resultType="BaseResultMap">
+
+    <select id="queryByName" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumnList"/>
         FROM student
@@ -38,11 +41,26 @@
         name = #{name, jdbcType=VARCHAR}
     </select>
 
-    <select id="queryById" resultType="BaseResultMap">
+    <select id="queryById" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumnList"/>
         FROM student
         WHEN
         id = #{id, jdbcType=BIGINT}
     </select>
+
+    <update id="update">
+        UPDATE student
+        SET
+        name = #{name, jdbcType=VARCHAR},
+        password = #{password, jdbcType=VARCHAR},
+        email=#{email, jdbcType=VARCHAR},
+        update_time=now()
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM student
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
 </mapper>

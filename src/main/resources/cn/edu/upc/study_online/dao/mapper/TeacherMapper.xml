@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.TeacherMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.TeacherDo">
+        <result column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR" javaType="String"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR" javaType="String"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+    <sql id="BaseColumnList">
+        ID, NAME, PASSWORD, EMAIL, CREATE_TIME, UPDATE_TIME
+    </sql>
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO teacher(
+        <include refid="BaseColumnList"/>
+        )VALUES (
+        #{id, jdbcType=BIGINT},
+        #{name, jdbcType=VARCHAR},
+        #{password, jdbcType=VARCHAR},
+        #{email, jdbcType=VARCHAR},
+        now(),
+        now()
+        )
+
+    </insert>
+
+    <select id="queryByName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM teacher
+        WHERE
+        name = #{name, jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM teacher
+        WHEN
+        id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <update id="update">
+        UPDATE teacher
+        SET
+        name = #{name, jdbcType=VARCHAR},
+        password = #{password, jdbcType=VARCHAR},
+        email=#{email, jdbcType=VARCHAR},
+        update_time=now()
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM teacher
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+</mapper>

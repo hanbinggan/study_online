@@ -12,4 +12,5 @@ public interface StudentMapper {
     StudentDo queryByName(String name);
     StudentDo queryById(Long id);
     Long update(StudentDo studentDo);
+    Long delete(Long id);
 }

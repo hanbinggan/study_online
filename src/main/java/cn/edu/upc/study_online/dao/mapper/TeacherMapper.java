@@ -12,4 +12,5 @@ public interface TeacherMapper {
     TeacherDo queryByName(String name);
     TeacherDo queryById(Long id);
     Long update(TeacherDo teacherDo);
+    Long delete(Long id);
 }

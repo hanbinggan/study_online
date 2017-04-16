@@ -28,4 +28,8 @@ public class TeacherDao {
     public Long update(TeacherDo teacherDo){
         return teacherMapper.update(teacherDo);
     }
+
+    public Long delete(Long id){
+        return teacherMapper.delete(id);
+    }
 }

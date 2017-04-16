@@ -17,10 +17,9 @@
             LAST_INSERT_ID()
         </selectKey>
         insert into admin (
-        <include refid="BaseColumnList"/>
-        -- ID,
-        -- NAME,
-        -- PASSWORD
+        ID,
+        NAME,
+        PASSWORD
         ) values (
         #{id,jdbcType=BIGINT},
         #{name, jdbcType=VARCHAR},
