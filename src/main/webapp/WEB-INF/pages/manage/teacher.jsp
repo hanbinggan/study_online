@@ -56,7 +56,7 @@
                 <%--<li><a href="#">Settings</a></li>--%>
                 <li><a href="#">管理</a></li>
                 <li><a href="#">个人中心</a></li>
-                <li><a href="#">管理员</a></li>
+                <li><a href="#">${sessionScope.user['name']}</a></li>
                 <li><a href="#">退出</a></li>
 
             </ul>

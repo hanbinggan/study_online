@@ -13,6 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class BaseController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String index(){
-        return "index";
+        return "main";
     }
 }

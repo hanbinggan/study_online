@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: songqiaolin
@@ -27,42 +28,31 @@
 
     <!-- Custom styles for this template -->
     <link href="/resources/css/signin.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]>
-    <script src="/resources/assets/js/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="/resources/assets/js/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
 
 <div class="container">
-
-    <form class="form-signin">
+    <form class="form-signin" action="/login" method="post">
         <h2 class="form-signin-heading">登录</h2>
-        <label for="inputEmail" class="sr-only">邮箱</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="邮箱" required autofocus>
-        <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
+        <label for="name" class="sr-only">名字</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="名字" required autofocus>
+        <label for="password" class="sr-only">密码</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
         <label class="radio-inline">
-            <input type="radio" name="optradio" checked>学生
+            <input type="radio" name="role" value="student" checked>学生
         </label>
         <label class="radio-inline">
-            <input type="radio" name="optradio">老师
+            <input type="radio" name="role" value="teacher">老师
         </label>
+        <c:if test="${not empty warning}">
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> ${warning}
+            </div>
+        </c:if>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
     </form>
-
 </div> <!-- /container -->
-
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="/resources/assets/js/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
