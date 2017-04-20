@@ -42,7 +42,7 @@
         SELECT
         <include refid="BaseColumnList"/>
         FROM teacher
-        WHEN
+        WHERE
         id = #{id, jdbcType=BIGINT}
     </select>
 
@@ -53,6 +53,7 @@
         password = #{password, jdbcType=VARCHAR},
         email=#{email, jdbcType=VARCHAR},
         update_time=now()
+        WHERE id=#{id, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">
@@ -60,4 +61,10 @@
         FROM teacher
         WHERE id=#{id, jdbcType=BIGINT}
     </delete>
+
+    <select id="queryAll" resultMap="BaseResultMap" resultType="java.util.List">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM teacher
+    </select>
 </mapper>

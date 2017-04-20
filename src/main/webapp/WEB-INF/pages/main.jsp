@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: songqiaolin
-  Date: 2017/4/16
-  Time: 下午7:40
+  Date: 2017/4/19
+  Time: 上午9:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/resources/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +26,7 @@
     <link href="/resources/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
+    <link href="/resources/css/dashboard.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="/resources/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -43,7 +42,7 @@
 <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -51,27 +50,45 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">study online</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <%--<li><a href="#">Dashboard</a></li>--%>
+                <%--<li><a href="#">Settings</a></li>--%>
+                <li><a href="#">管理</a></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">管理员</a></li>
+                <li><a href="#">退出</a></li>
+
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">课程 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">参加课程</a></li>
+                <li><a href="#">课程管理</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">考试</a></li>
+                <li><a href="">参加考试</a></li>
+                <li><a href="">考试管理</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">练习</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">课程</h1>
 
-    <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        </div>
     </div>
-
-</div><!-- /.container -->
-
+</div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -79,7 +96,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/resources/assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="/resources/dist/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="/resources/assets/js/vendor/holder.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/resources/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
+

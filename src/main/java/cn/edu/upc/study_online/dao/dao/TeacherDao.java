@@ -5,6 +5,8 @@ import cn.edu.upc.study_online.dao.object.TeacherDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by songqiaolin on 2017/4/8.
  */
@@ -31,5 +33,9 @@ public class TeacherDao {
 
     public Long delete(Long id){
         return teacherMapper.delete(id);
+    }
+
+    public List<TeacherDo> queryAll(){
+        return teacherMapper.queryAll();
     }
 }

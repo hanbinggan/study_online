@@ -5,6 +5,8 @@ import cn.edu.upc.study_online.dao.object.StudentDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by songqiaolin on 2017/4/8.
  */
@@ -30,5 +32,9 @@ public class StudentDao {
 
     public Long delete(Long id){
         return studentMapper.delete(id);
+    }
+
+    public List<StudentDo> queryAll(){
+        return studentMapper.queryAll();
     }
 }

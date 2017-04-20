@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * Created by songqiaolin on 2017/3/26.
  */
-@ContextConfiguration(locations = {"classpath:spring/study_online.xml"})
+@ContextConfiguration(locations = {"classpath:spring/study_online_context.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Ignore
 public class BaseTest {

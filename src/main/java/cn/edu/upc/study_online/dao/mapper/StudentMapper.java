@@ -3,6 +3,8 @@ package cn.edu.upc.study_online.dao.mapper;
 import cn.edu.upc.study_online.dao.object.StudentDo;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by songqiaolin on 2017/4/8.
  */
@@ -13,4 +15,5 @@ public interface StudentMapper {
     StudentDo queryById(Long id);
     Long update(StudentDo studentDo);
     Long delete(Long id);
+    List<StudentDo> queryAll();
 }
