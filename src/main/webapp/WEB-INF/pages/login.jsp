@@ -33,7 +33,13 @@
 <body>
 
 <div class="container">
-    <form class="form-signin" action="/login" method="post">
+    <form class="form-signin" action="
+    <c:if test="${not empty admin}">
+        /manage/login
+    </c:if>
+    <c:if test="${empty admin}">
+        /login
+    </c:if>" method="post">
         <h2 class="form-signin-heading">登录</h2>
         <label for="name" class="sr-only">名字</label>
         <input type="text" id="name" name="name" class="form-control" placeholder="名字" required autofocus>
@@ -42,6 +48,7 @@
         <label>
             <br/>
         </label>
+    <c:if test="${empty admin}">
         <label class="radio-inline">
             <input type="radio" name="role" value="student" checked>学生
         </label>
@@ -51,17 +58,17 @@
         <label>
             <br/>
         </label>
-        <c:if test="${not empty warning}">
-            <div class="alert alert-warning">
-                <strong>Warning!</strong> ${warning}
-            </div>
-        </c:if>
         <label class="pull-right">
-            <a href="#">注册</a>
+            <a href="/register">注册</a>
         </label>
+    </c:if>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-
+    <c:if test="${not empty warning}">
+        <div class="alert alert-warning">
+            <strong>Warning!</strong> ${warning}
+        </div>
+    </c:if>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
     </form>
 </div> <!-- /container -->
 </body>

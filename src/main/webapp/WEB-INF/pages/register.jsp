@@ -59,7 +59,7 @@
             </div>
         </c:if>
         <label class="pull-right">
-            <a href="#">登录</a>
+            <a href="/login">登录</a>
         </label>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>

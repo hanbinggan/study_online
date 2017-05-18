@@ -1,7 +1,9 @@
 package cn.edu.upc.study_online.controller;
 
+import cn.edu.upc.study_online.dao.dao.AdminDao;
 import cn.edu.upc.study_online.dao.dao.StudentDao;
 import cn.edu.upc.study_online.dao.dao.TeacherDao;
+import cn.edu.upc.study_online.dao.object.AdminDo;
 import cn.edu.upc.study_online.dao.object.StudentDo;
 import cn.edu.upc.study_online.dao.object.TeacherDo;
 import org.apache.commons.collections.map.HashedMap;
@@ -24,6 +26,8 @@ public class AuthController {
     private StudentDao studentDao;
     @Autowired
     private TeacherDao teacherDao;
+    @Autowired
+    private AdminDao adminDao;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
@@ -103,4 +107,26 @@ public class AuthController {
         setUserSession(name, role, request);
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/manage/login")
+    public String adminLogin(Model model){
+        model.addAttribute("admin","admin");
+        return "login";
+    }
+
+    @RequestMapping(value = "/manage/login", method = RequestMethod.POST)
+    public String adminDoLogin(@RequestParam(value = "name") String name,
+                               @RequestParam(value = "password") String password,
+                               Model model,
+                               HttpServletRequest request){
+        AdminDo adminDo = adminDao.selectByName(name);
+        if(adminDo != null && adminDo.getPassword().equals(password)){
+            setUserSession(name,"admin",request);
+            return "redirect:/manage/student/";
+        }
+        model.addAttribute("warning", "账号密码错误");
+        model.addAttribute("admin","admin");
+        return "login";
+    }
+
 }

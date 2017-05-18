@@ -17,6 +17,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
             response.sendRedirect("/login");
             return false;
         }
+        String url = request.getRequestURI();
+        if(url.contains("manage") && !"admin".equals(user.get("role"))){
+            response.sendRedirect("/");
+            return false;
+        }
         return super.preHandle(request, response, handler);
     }
 }
