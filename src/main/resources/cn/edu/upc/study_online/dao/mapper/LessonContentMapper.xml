@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.LessonContentMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.LessonContentDo">
+        <result column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="lesson_chapter_id" property="lessonChapterId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="file_id" property="fileId" jdbcType="VARCHAR" javaType="Long"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="study_star_score" property="studyStarScore" jdbcType="BIGINT" javaType="Long"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, lesson_chapter_id, name, file_id, create_time, update_time, study_star_score
+    </sql>
+
+    <insert id="insert">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO lesson_content (
+          <include refid="BaseColumnList"/>
+        )VALUES (
+        id=#{id, jdbcType=BIGINT},
+        lesson_chapter_id=#{lessonChapterId, jdbcType=BIGINT},
+        name=#{name, jdbcType=VARCHAR},
+        file_id=#{fileId, jdbcType=BIGINT},
+        study_star_score=#{studyStarScore, jdbcType=BIGINT},
+        create_time=now(),
+        update_time=now()
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE lesson_content
+        SET
+        lesson_chapter_id=#{lessonChapterId, jdbcType=BIGINT},
+        name=#{name, jdbcType=VARCHAR},
+        file_id=#{fileId, jdbcType=BIGINT},
+        study_star_score=#{studyStarScore, jdbcType=BIGINT},
+        update_time=now()
+        WHERE id=#{id, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM lesson_content
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM lesson_content
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+
+    <select id="queryByLessonChapter" resultMap="BaseResultMap" resultType="java.util.List">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM lesson_content
+        WHERE lesson_chapter_id=#{lessonChapterId, jdbcType=BIGINT}
+        ORDER BY create_time
+    </select>
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.LessonMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.LessonDo">
+        <result column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="description" property="description" jdbcType="VARCHAR" javaType="String"/>
+        <result column="creator_id" property="creatorId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, name, description, creator_id, create_time, update_time
+    </sql>
+
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO lesson(
+        <include refid="BaseColumnList"/>
+        )VALUE (
+        #{id, jdbcType=BIGINT},
+        #{name, jdbcType=VARCHAR},
+        #{description, jdbcType=VARCHAR},
+        #{creator_id, jdbcType=BIGINT},
+        now(),
+        now()
+        )
+    </insert>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM lesson
+        WHERE
+        id=#{id, jdbyType=BIGINT}
+    </select>
+
+    <update id="update">
+        UPDATE lesson
+        SET
+        name=#{name, jdbcType=VARCHAR},
+        description=#{description, jdbcType=VARCHAR},
+        creator_id=#{creator_id, jdbcType=BIGINT},
+        update_time=now()
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM lesson
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+
+    <select id="selectByCreator" resultType="java.util.List" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumnList" />
+        FROM lesson
+        WHERE creator_id=#{creator_id, jdbcType=BIGINT}
+    </select>
+</mapper>

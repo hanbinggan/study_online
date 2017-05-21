@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.StudentLessonRefMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.StudentLessonRefDo">
+        <result column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="student_id" property="studentId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="lesson_id" property="lessonId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="status" property="status" jdbcType="TINYINT" javaType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, student_id, lesson_id, status, create_time, update_time
+    </sql>
+
+    <insert id="insert">
+        <selectKey keyProperty="id"  resultType="java.lang.Long" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO student_lesson_ref(
+        <include refid="BaseColumnList"/>
+        )VALUES (
+        #{id, jdbcType=BIGINT},
+        #{studentId, jdbcType=BIGINT},
+        #{lessonId, jdbcType=BIGINT},
+        #{status, jdbcType=TINYINT},
+        now(),
+        now()
+        )
+    </insert>
+
+
+    <update id="update">
+        UPDATE student_lesson_ref
+        SET
+        status=#{status, jdbcType=TINYINT},
+        update_time=now()
+    </update>
+
+    <delete id="delete">
+        DELETE FROM student_lesson_ref
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM student_lesson_ref
+        WHERE
+        id=#{id, jdbcType=BIGINT}
+    </select>
+
+    <select id="queryByStudentStatus" resultMap="BaseResultMap" resultType="java.util.List">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM student_lesson_ref
+        WHERE student_id=#{studentId, jdbcType=BIGINT}
+        AND status=#{status, jdbcType=TINYINT}
+    </select>
+
+    <select id="queryByLessonStatus" resultMap="BaseResultMap" resultType="java.util.List">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM student_lesson_ref
+        WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
+        AND status=#{status, jdbcType=TINYINT}
+    </select>
+</mapper>

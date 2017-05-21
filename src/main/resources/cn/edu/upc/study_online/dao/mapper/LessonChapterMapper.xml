@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+        <!--/**-->
+        <!--*   id BIGINT PRIMARY KEY COMMENT 'id',-->
+        <!--lesson_id BIGINT COMMENT '课程 id',-->
+        <!--name VARCHAR(128) COMMENT '名字',-->
+        <!--description VARCHAR(512) COMMENT '描述',-->
+        <!--order_number BIGINT COMMENT '排序',-->
+        <!--create_time DATETIME COMMENT '创建时间',-->
+        <!--update_time DATETIME COMMENT '更新时间'-->
+        <!--*/-->
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.LessonChapterMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.LessonChapterDo">
+        <result column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="lesson_id" property="lessonId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="description" property="description" jdbcType="VARCHAR" javaType="String"/>
+        <result column="order_number" property="orderNumber" jdbcType="BIGINT" javaType="Long"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, lesson_id, name, description, order_number, create_time, update_time
+    </sql>
+
+    <insert id="insert">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+          SELECT
+          LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO lesson_chapter(
+        <include refid="BaseColumnList"/>
+        )VALUES (
+        lesson_id=#{lessonId, jdbcType=BIGINT},
+        name=#{name, jdbcType=BIGINT},
+        description=#{description, jdbcType=VARCHAR},
+        order_number=#{orderNumber, jdbcType=BIGINT},
+        create_time=now(),
+        update_time=now()
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE lesson_chapter
+        SET
+        name=#{name, jdbcType=VARCHAR},
+        description=#{description, jdbcType=VARCHAR},
+        order_number=#{orderNumber, jdbcType=BIGINT},
+        update_time=now()
+        WHERE id=#{id, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM lesson_chapter
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        FROM lesson_chapter
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+
+    <select id="queryByLesson" resultMap="BaseResultMap" resultType="java.util.List">
+        select  <include refid="BaseColumnList"/>
+        FROM lesson_chapter
+        WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
+        ORDER BY order_number
+    </select>
+</mapper>

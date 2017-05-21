@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.FileMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.FileDo">
+        <result column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="path" property="path" jdbcType="VARCHAR" javaType="String"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="type" property="type" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+    
+    <sql id="BaseColumnList">
+        id, path, name, `type`, create_time, update_time
+    </sql>
+
+    <insert id="insert">
+        <selectKey keyProperty="id" keyColumn="id" resultType="java.lang.Long" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO file(
+        <include refid="BaseColumnList"/>
+        ) VALUES (
+        id=#{id, jdbcType=BIGINT},
+        path=#{path, jdbcType=VARCHAR},
+        name=#{name, jdbcType=VARCHAR},
+        `type`=#{type, jdbcType=TINYINT},
+        create_time=now(),
+        update_time=now()
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE file
+        SET
+        path=#{path, jdbcType=VARCHAR},
+        name=#{name, jdbcType=VARCHAR},
+        `type`=#{type, jdbcType=TINYINT},
+        create_time=now(),
+        update_time=now()
+        WHERE id=#{id, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM file
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM file
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+</mapper>
