@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">课程 <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/lesson">课程 <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">参加课程</a></li>
                 <li><a href="#">课程管理</a></li>
             </ul>

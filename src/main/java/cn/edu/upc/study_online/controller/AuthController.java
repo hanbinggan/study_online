@@ -42,13 +42,13 @@ public class AuthController {
         if ("student".equals(role)) {
             StudentDo studentDo = studentDao.queryByName(name);
             if (studentDo != null && studentDo.getPassword().equals(password)) {
-                setUserSession(name, role, httpServletRequest);
+                setUserSession(name, role, studentDo.getId(), httpServletRequest);
                 return "redirect:/";
             }
         } else {
             TeacherDo teacherDo = teacherDao.queryByName(name);
             if (teacherDo != null && teacherDo.getPassword().equals(password)) {
-                setUserSession(name, role, httpServletRequest);
+                setUserSession(name, role, teacherDo.getId(), httpServletRequest);
                 return "redirect:/";
             }
         }
@@ -61,11 +61,12 @@ public class AuthController {
         return "main";
     }
 
-    public void setUserSession(String name, String role
-            , HttpServletRequest httpServletRequest) {
-        Map<String, String> user = new HashedMap();
+    public void setUserSession(String name, String role,
+                               Long id, HttpServletRequest httpServletRequest) {
+        Map<String, Object> user = new HashedMap();
         user.put("name", name);
         user.put("role", role);
+        user.put("id", id);
         httpServletRequest.getSession().setAttribute("user", user);
         httpServletRequest.getSession().setMaxInactiveInterval(30 * 60);
     }
@@ -81,6 +82,7 @@ public class AuthController {
                              @RequestParam(value = "password") String password,
                              @RequestParam(value = "role") String role,
                              Model model, HttpServletRequest request) {
+        Long id = null;
         if ("student".equals(role)) {
             StudentDo studentDo = studentDao.queryByName(name);
             if (studentDo != null) {
@@ -92,6 +94,7 @@ public class AuthController {
             studentDo.setEmail(email);
             studentDo.setPassword(password);
             studentDao.insert(studentDo);
+            id = studentDo.getId();
         } else {
             TeacherDo teacherDo = teacherDao.queryByName(name);
             if (teacherDo != null) {
@@ -103,14 +106,15 @@ public class AuthController {
             teacherDo.setEmail(email);
             teacherDo.setPassword(password);
             teacherDao.insert(teacherDo);
+            id = teacherDo.getId();
         }
-        setUserSession(name, role, request);
+        setUserSession(name, role, id, request);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/manage/login")
-    public String adminLogin(Model model){
-        model.addAttribute("admin","admin");
+    public String adminLogin(Model model) {
+        model.addAttribute("admin", "admin");
         return "login";
     }
 
@@ -118,14 +122,14 @@ public class AuthController {
     public String adminDoLogin(@RequestParam(value = "name") String name,
                                @RequestParam(value = "password") String password,
                                Model model,
-                               HttpServletRequest request){
+                               HttpServletRequest request) {
         AdminDo adminDo = adminDao.selectByName(name);
-        if(adminDo != null && adminDo.getPassword().equals(password)){
-            setUserSession(name,"admin",request);
+        if (adminDo != null && adminDo.getPassword().equals(password)) {
+            setUserSession(name, "admin", -1L, request);
             return "redirect:/manage/student/";
         }
         model.addAttribute("warning", "账号密码错误");
-        model.addAttribute("admin","admin");
+        model.addAttribute("admin", "admin");
         return "login";
     }
 

@@ -32,12 +32,13 @@
         INSERT INTO lesson_chapter(
         <include refid="BaseColumnList"/>
         )VALUES (
-        lesson_id=#{lessonId, jdbcType=BIGINT},
-        name=#{name, jdbcType=BIGINT},
-        description=#{description, jdbcType=VARCHAR},
-        order_number=#{orderNumber, jdbcType=BIGINT},
-        create_time=now(),
-        update_time=now()
+        #{id, jdbcType=BIGINT},
+        #{lessonId, jdbcType=BIGINT},
+        #{name, jdbcType=BIGINT},
+        #{description, jdbcType=VARCHAR},
+        #{orderNumber, jdbcType=BIGINT},
+        now(),
+        now()
         )
     </insert>
 

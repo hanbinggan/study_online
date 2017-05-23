@@ -32,6 +32,6 @@ public class LessonDao {
     }
 
     public List<LessonDo> selectByCreator(Long creatorId){
-        return selectByCreator(creatorId);
+        return lessonMapper.selectByCreator(creatorId);
     }
 }

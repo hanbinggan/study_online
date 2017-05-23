@@ -8,10 +8,11 @@
         <result column="creator_id" property="creatorId" jdbcType="BIGINT" javaType="Long"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="study_star_score" property="studyStarScore" jdbcType="BIGINT" javaType="Long"/>
     </resultMap>
 
     <sql id="BaseColumnList">
-        id, name, description, creator_id, create_time, update_time
+        id, name, description, creator_id, study_star_score, create_time, update_time
     </sql>
 
     <insert id="insert">
@@ -25,7 +26,8 @@
         #{id, jdbcType=BIGINT},
         #{name, jdbcType=VARCHAR},
         #{description, jdbcType=VARCHAR},
-        #{creator_id, jdbcType=BIGINT},
+        #{creatorId, jdbcType=BIGINT},
+        #{studyStarScore, jdbcType=BIGINT},
         now(),
         now()
         )
@@ -36,7 +38,7 @@
         <include refid="BaseColumnList"/>
         FROM lesson
         WHERE
-        id=#{id, jdbyType=BIGINT}
+        id=#{id, jdbcType=BIGINT}
     </select>
 
     <update id="update">
@@ -44,7 +46,7 @@
         SET
         name=#{name, jdbcType=VARCHAR},
         description=#{description, jdbcType=VARCHAR},
-        creator_id=#{creator_id, jdbcType=BIGINT},
+        study_star_score=#{studyStarScore, jdbcType=BIGINT},
         update_time=now()
         WHERE
         id=#{id, jdbcType=BIGINT}
@@ -59,6 +61,6 @@
     <select id="selectByCreator" resultType="java.util.List" resultMap="BaseResultMap">
         SELECT <include refid="BaseColumnList" />
         FROM lesson
-        WHERE creator_id=#{creator_id, jdbcType=BIGINT}
+        WHERE creator_id=#{creatorId, jdbcType=BIGINT}
     </select>
 </mapper>
