@@ -2,11 +2,8 @@ package cn.edu.upc.study_online.controller;
 
 import cn.edu.upc.study_online.dao.dao.LessonChapterDao;
 import cn.edu.upc.study_online.dao.dao.LessonDao;
-import cn.edu.upc.study_online.dao.dao.TeacherDao;
 import cn.edu.upc.study_online.dao.object.LessonChapterDo;
 import cn.edu.upc.study_online.dao.object.LessonDo;
-import cn.edu.upc.study_online.dao.object.TeacherDo;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

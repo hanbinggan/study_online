@@ -63,30 +63,32 @@
         <button type="button" class="btn btn-primary pull-right"
                 onclick="location.href='<%=path%>/lesson/content/add?id=${lesson_chapter.id}';">增加章节内容
         </button>
-    <%--</h3>--%>
-    <%--<div class="table-responsive">--%>
-        <%--<table class="table table-striped">--%>
-            <%--<thead>--%>
-            <%--<tr>--%>
-                <%--<th>id</th>--%>
-                <%--<th>课程</th>--%>
-                <%--<th>描述</th>--%>
-                <%--<th>创建时间</th>--%>
-                <%--<th>操作</th>--%>
-            <%--</tr>--%>
-            <%--</thead>--%>
-            <%--<tbody>--%>
-            <%--<c:forEach items="${lessonChapters}" var="lessonChapter">--%>
-                <%--<tr>--%>
-                    <%--<td>${lessonChapter.id}</td>--%>
-                    <%--<td><a href="<%=path%>/lesson/chapter/info?id=${lessonChapter.id}">${lessonChapter.name}</a></td>--%>
-                    <%--<td>${lessonChapter.description}</td>--%>
-                    <%--<td><fmt:formatDate value="${lessonChapter.createTime}"/></td>--%>
-                    <%--<td><a href="<%=path%>/lesson/delete?id=${lessonChapter.id}">删除</a></td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-            <%--</tbody>--%>
-        <%--</table>--%>
-    <%--</div>--%>
+    </h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>课程内容名</th>
+                <th>学习之星分数</th>
+                <th>排序</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${lessonContents}" var="lessonContent">
+                <tr>
+                    <td>${lessonContent.id}</td>
+                    <td><a href="<%=path%>/lesson/content/info?id=${lessonContent.id}">${lessonContent.name}</a></td>
+                    <td>${lessonContent.studyStarScore}</td>
+                    <td>${lessonContent.orderNumber}</td>
+                    <td><fmt:formatDate value="${lessonContent.createTime}"/></td>
+                    <td><a href="<%=path%>/lesson/content/delete?id=${lessonContent.id}">删除</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 <jsp:include page="../footer.jsp"/>

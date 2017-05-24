@@ -22,12 +22,12 @@
         INSERT INTO file(
         <include refid="BaseColumnList"/>
         ) VALUES (
-        id=#{id, jdbcType=BIGINT},
-        path=#{path, jdbcType=VARCHAR},
-        name=#{name, jdbcType=VARCHAR},
-        `type`=#{type, jdbcType=TINYINT},
-        create_time=now(),
-        update_time=now()
+        #{id, jdbcType=BIGINT},
+        #{path, jdbcType=VARCHAR},
+        #{name, jdbcType=VARCHAR},
+        #{type, jdbcType=TINYINT},
+        now(),
+        now()
         )
     </insert>
     

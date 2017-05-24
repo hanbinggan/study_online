@@ -10,4 +10,5 @@
 
     <import resource="mvc_dispatcher_context.xml"/>
     <import resource="mybatis_configuration.xml"/>
+    <import resource="bean_config.xml"/>
 </beans>
