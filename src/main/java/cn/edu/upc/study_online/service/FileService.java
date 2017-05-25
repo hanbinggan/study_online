@@ -3,6 +3,8 @@ package cn.edu.upc.study_online.service;
 import cn.edu.upc.study_online.dao.dao.FileDao;
 import cn.edu.upc.study_online.dao.object.FileDo;
 import cn.edu.upc.study_online.util.FileUtil;
+import cn.edu.upc.study_online.util.PdfUtil;
+import cn.edu.upc.study_online.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,12 @@ public class FileService {
             FileDo fileDo = new FileDo();
             fileDo.setName(name);
             fileDo.setPath(path);
+            fileDo.setType(FileDo.TYPE.OTHER.getVal());
+            String last = StringUtil.getSubffix(name);
+            if ("pptx".equals(last) || "xlsx".equals(last) || "docx".equals(last)) {
+                PdfUtil.convertToPdf(path, last);
+                fileDo.setType(FileDo.TYPE.PDF.getVal());
+            }
             fileDao.insert(fileDo);
             return fileDo.getId();
         } catch (IOException e) {

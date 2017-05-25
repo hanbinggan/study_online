@@ -25,7 +25,7 @@ public class FileUtil {
         }
         String realName = ((CommonsMultipartFile) file).getFileItem().getName();
         String name = UUID.randomUUID().toString();
-        realName = realName.substring(realName.lastIndexOf('.'), realName.length());
+        realName = "." + StringUtil.getSubffix(realName);
         String filePath = path + name + realName;
         File saveFile = new File(filePath);
         boolean flag = saveFile.createNewFile();

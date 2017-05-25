@@ -46,4 +46,9 @@ public class LessonContentController {
         }
         return "redirect: /lesson/chapter/info?id=" + lessonContentDo.getLessonChapterId();
     }
+
+    @RequestMapping(value = "/info")
+    public String info(@RequestParam("id") String id, Model model){
+        return "";
+    }
 }

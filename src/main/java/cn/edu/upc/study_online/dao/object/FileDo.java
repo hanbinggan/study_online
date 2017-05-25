@@ -7,21 +7,33 @@ package cn.edu.upc.study_online.dao.object;
 import java.util.Date;
 
 /**
-
- CREATE TABLE file(
- id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
- path VARCHAR(128) COMMENT '文件目录',
- name VARCHAR(64) COMMENT '名字',
- type TINYINT UNSIGNED COMMENT '文件类型',
- create_time DATETIME COMMENT '创建时间',
- update_time DATETIME COMMENT '更新时间'
- ) COMMENT '文件';
+ * CREATE TABLE file(
+ * id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+ * path VARCHAR(128) COMMENT '文件目录',
+ * name VARCHAR(64) COMMENT '名字',
+ * type TINYINT UNSIGNED COMMENT '文件类型',
+ * create_time DATETIME COMMENT '创建时间',
+ * update_time DATETIME COMMENT '更新时间'
+ * ) COMMENT '文件';
  */
 public class FileDo {
     private Long id;
     private String path;
     private Integer type;
     private String name;
+
+    public enum TYPE {
+        PDF(1), OTHER(2);
+        private final int val;
+
+        TYPE(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+    }
 
     public String getName() {
         return name;
