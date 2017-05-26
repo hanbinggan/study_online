@@ -81,7 +81,7 @@
                     <td><a href="<%=path%>/lesson/chapter/info?id=${lessonChapter.id}">${lessonChapter.name}</a></td>
                     <td>${lessonChapter.description}</td>
                     <td><fmt:formatDate value="${lessonChapter.createTime}"/></td>
-                    <td><a href="<%=path%>/lesson/delete?id=${lessonChapter.id}">删除</a></td>
+                    <td><a href="<%=path%>/lesson/chapter/delete?id=${lessonChapter.id}">删除</a></td>
                 </tr>
             </c:forEach>
             </tbody>

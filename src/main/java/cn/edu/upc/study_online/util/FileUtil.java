@@ -40,10 +40,4 @@ public class FileUtil {
         }
         return filePath;
     }
-
-    public static void main(String[] args) {
-        FileNameMap fileNameMap = URLConnection.getFileNameMap();
-        String mimeType = fileNameMap.getContentTypeFor("alert.gif");
-        System.out.println(mimeType);
-    }
 }

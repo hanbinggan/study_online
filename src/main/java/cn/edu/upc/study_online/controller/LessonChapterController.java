@@ -4,6 +4,7 @@ import cn.edu.upc.study_online.dao.dao.LessonChapterDao;
 import cn.edu.upc.study_online.dao.dao.LessonContentDao;
 import cn.edu.upc.study_online.dao.object.LessonChapterDo;
 import cn.edu.upc.study_online.dao.object.LessonContentDo;
+import cn.edu.upc.study_online.service.LessonChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class LessonChapterController {
     private LessonChapterDao lessonChapterDao;
     @Autowired
     private LessonContentDao lessonContentDao;
+
+    @Autowired
+    private LessonChapterService chapterService;
 
     @RequestMapping(value = "/add")
     public String add(@RequestParam(value = "lesson_id") Long lessonId, Model model) {
@@ -52,5 +56,12 @@ public class LessonChapterController {
     public String update(@ModelAttribute("lesson_chapter") LessonChapterDo lessonChapterDo) {
         lessonChapterDao.update(lessonChapterDo);
         return "redirect:/lesson/chapter/info?id=" + lessonChapterDo.getId();
+    }
+
+    @RequestMapping(value = "/delete")
+    public String delete(@RequestParam("id") Long id) {
+        LessonChapterDo lessonChapterDo = lessonChapterDao.queryById(id);
+        chapterService.delete(id);
+        return "redirect:/lesson/info?id=" + lessonChapterDo.getLessonId();
     }
 }

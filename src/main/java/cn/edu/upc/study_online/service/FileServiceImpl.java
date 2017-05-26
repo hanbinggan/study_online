@@ -10,13 +10,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
  * Created by songqiaolin on 2017/5/26.
  */
 @Component
-public class FileServiceImpl implements FileService{
+public class FileServiceImpl implements FileService {
     @Autowired
     private FileDao fileDao;
 
@@ -32,7 +33,7 @@ public class FileServiceImpl implements FileService{
             if ("pptx".equals(last) || "xlsx".equals(last) || "docx".equals(last)) {
                 PdfUtil.convertToPdf(path, last);
                 fileDo.setType(FileDo.TYPE.PDF.getVal());
-            }else if("pdf".equals(last)){
+            } else if ("pdf".equals(last)) {
                 fileDo.setType(FileDo.TYPE.PDF.getVal());
             }
             fileDao.insert(fileDo);
@@ -50,7 +51,14 @@ public class FileServiceImpl implements FileService{
     @Override
     public Long delete(Long id) {
         FileDo fileDo = fileDao.queryById(id);
-
-        return null;
+        File file = new File(fileDo.getPath());
+        file.delete();
+        String ext = StringUtil.getSubffix(fileDo.getPath());
+        if ("docx".equals(ext) || "xlsx".equals(ext) || "pptx".equals(ext)) {
+            String path = fileDo.getPath().replace(ext, "pdf");
+            file = new File(path);
+            file.delete();
+        }
+        return fileDao.delete(id);
     }
 }

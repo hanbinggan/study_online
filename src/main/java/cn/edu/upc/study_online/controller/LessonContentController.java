@@ -130,8 +130,7 @@ public class LessonContentController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(@RequestParam("id") Long id){
         LessonContentDo lessonContentDo = lessonContentDao.queryById(id);
-
-
+        fileService.delete(lessonContentDo.getFileId());
         lessonContentDao.delete(id);
         return "redirect: /lesson/chapter/info?id=" + lessonContentDo.getLessonChapterId();
     }
