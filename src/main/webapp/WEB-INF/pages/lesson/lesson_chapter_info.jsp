@@ -72,7 +72,6 @@
                 <th>课程内容名</th>
                 <th>学习之星分数</th>
                 <th>排序</th>
-                <th>文件名称</th>
                 <th>创建时间</th>
                 <th>操作</th>
             </tr>
@@ -83,7 +82,6 @@
                     <td>${lessonContent.id}</td>
                     <td><a href="<%=path%>/lesson/content/info?id=${lessonContent.id}">${lessonContent.name}</a></td>
                     <td>${lessonContent.studyStarScore}</td>
-                    <td>${lessonContent.orderNumber}</td>
                     <td>${lessonContent.orderNumber}</td>
                     <td><fmt:formatDate value="${lessonContent.createTime}"/></td>
                     <td><a href="<%=path%>/lesson/content/delete?id=${lessonContent.id}">删除</a></td>

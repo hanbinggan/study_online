@@ -26,35 +26,38 @@
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">课程内容名</label>
                 <div class="col-sm-5">
-                    <form:input path="name" type="text" class="form-control" id="name"/>
+                    <form:input path="name" type="text" class="form-control" id="name" readonly="true"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="orderNumber" class="col-sm-2 control-label">排序</label>
                 <div class="col-sm-5">
-                    <form:input path="orderNumber" type="text" class="form-control" id="orderNumber"/>
+                    <form:input path="orderNumber" type="text" class="form-control" id="orderNumber" readonly="true"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="studyStarScore" class="col-sm-2 control-label">学习之星分数</label>
                 <div class="col-sm-5">
-                    <form:input path="studyStarScore" type="text" class="form-control" id="studyStarScore"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="file" class="col-sm-2 control-label">文件</label>
-                <div class="col-sm-5">
-                    <div><br/></div>
-                    <input type="file" name="file" class="form-control-file" id="file" aria-describedby="fileHelp"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-9">
-                    <button type="submit" class="btn btn-default">更新课程内容</button>
+                    <form:input path="studyStarScore" type="text" class="form-control" id="studyStarScore"
+                                readonly="true"/>
                 </div>
             </div>
         </form:form>
     </div>
-<jsp:include page="../footer.jsp"/>
+    <h3>文件预览</h3>
+    <div class="row placeholders">
+        <div class='embed-responsive' style='padding-bottom:70%'>
+            <object data="<%=path%>/lesson/content/file?file_name=${file_uri}" width="100%"
+                    height="100%"
+                    <c:if test="${not empty file_type}">
+                        type="${file_type}"
+                    </c:if>
+            ></object>
+            <%--<object data="/resources/img/2021.swf" width="100%"--%>
+            <%--height="100%">--%>
+            </object>
+        </div>
+
+    </div>
+    <jsp:include page="../footer.jsp"/>

@@ -6,6 +6,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.FileNameMap;
+import java.net.URLConnection;
 import java.util.UUID;
 
 /**
@@ -37,5 +39,11 @@ public class FileUtil {
             throw new IOException();
         }
         return filePath;
+    }
+
+    public static void main(String[] args) {
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        String mimeType = fileNameMap.getContentTypeFor("alert.gif");
+        System.out.println(mimeType);
     }
 }

@@ -15,29 +15,10 @@ import java.io.IOException;
 /**
  * Created by songqiaolin on 2017/5/24.
  */
-@Component
-public class FileService {
-    @Autowired
-    private FileDao fileDao;
+public interface FileService {
+    Long saveFile(MultipartFile file) throws IOException;
 
-    public Long saveFile(MultipartFile file) throws IOException {
-        try {
-            String name = ((CommonsMultipartFile) file).getFileItem().getName();
-            String path = FileUtil.saveFile(file);
-            FileDo fileDo = new FileDo();
-            fileDo.setName(name);
-            fileDo.setPath(path);
-            fileDo.setType(FileDo.TYPE.OTHER.getVal());
-            String last = StringUtil.getSubffix(name);
-            if ("pptx".equals(last) || "xlsx".equals(last) || "docx".equals(last)) {
-                PdfUtil.convertToPdf(path, last);
-                fileDo.setType(FileDo.TYPE.PDF.getVal());
-            }
-            fileDao.insert(fileDo);
-            return fileDo.getId();
-        } catch (IOException e) {
-            throw e;
-        }
-    }
+    FileDo queryById(Long id);
 
+    Long delete(Long id);
 }
