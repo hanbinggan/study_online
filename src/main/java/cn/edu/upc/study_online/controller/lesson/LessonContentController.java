@@ -1,4 +1,4 @@
-package cn.edu.upc.study_online.controller;
+package cn.edu.upc.study_online.controller.lesson;
 
 import cn.edu.upc.study_online.dao.dao.LessonContentDao;
 import cn.edu.upc.study_online.dao.object.FileDo;
