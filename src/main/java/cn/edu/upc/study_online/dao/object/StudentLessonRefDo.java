@@ -27,7 +27,8 @@ public class StudentLessonRefDo {
     public enum STATUS {
         applying(1),
         applied(2),
-        finished(3);
+        finished(3),
+        reject(4);
         private final int value;
 
         STATUS(int value) {

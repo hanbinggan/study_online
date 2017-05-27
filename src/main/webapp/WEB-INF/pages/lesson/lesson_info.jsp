@@ -17,6 +17,17 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">课程管理</h1>
+    <div class="row placeholders">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-info" onclick="location.href='<%=path%>/lesson/student?id=${lesson.id}'">
+                学生管理
+            </button>
+            <button type="button" class="btn btn-secondary">Middle</button>
+            <button type="button" class="btn btn-secondary">Right</button>
+
+        </div>
+    </div>
+
     <h3 class="sub-header">课程详情</h3>
     <div class="row placeholders">
         <form:form class="form-horizontal" method="post" modelAttribute="lesson"

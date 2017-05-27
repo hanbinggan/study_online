@@ -59,8 +59,25 @@
     </delete>
 
     <select id="selectByCreator" resultType="java.util.List" resultMap="BaseResultMap">
-        SELECT <include refid="BaseColumnList" />
+        SELECT
+        <include refid="BaseColumnList"/>
         FROM lesson
         WHERE creator_id=#{creatorId, jdbcType=BIGINT}
+    </select>
+
+    <select id="selectAll" resultType="java.util.List" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM lesson
+    </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM lesson
+        WHERE id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item, jdbcType=BIGINT}
+        </foreach>
     </select>
 </mapper>

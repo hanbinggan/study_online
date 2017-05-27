@@ -38,4 +38,8 @@ public class StudentLessonRefDao {
     public List<StudentLessonRefDo> queryByLessonStatus(Long lessonId, Integer status) {
         return studentLessonRefMapper.queryByLessonStatus(lessonId, status);
     }
+
+    public StudentLessonRefDo queryByStudentLesson(Long studentId, Long lessonId) {
+        return studentLessonRefMapper.queryByStudentLesson(studentId, lessonId);
+    }
 }

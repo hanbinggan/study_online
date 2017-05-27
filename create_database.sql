@@ -82,3 +82,65 @@ CREATE TABLE usr_tokenid
   token_id BIGINT(20),
   create_time DATETIME
 );
+
+
+CREATE TABLE lesson_note(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+  lesson_content_id BIGINT COMMENT '学习内容 id',
+  content VARCHAR(512) COMMENT '笔记',
+  create_time DATETIME DEFAULT  now() COMMENT '创建时间'
+) COMMENT '课程笔记';
+
+
+CREATE TABLE study_record(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+  student_id BIGINT COMMENT '学生 id',
+  lesson_id BIGINT COMMENT '课程 id',
+  type TINYINT COMMENT '产生积分类型',
+  object_id BIGINT COMMENT '对象 id',
+  study_star_record BIGINT COMMENT '学习积分',
+  create_time DATETIME COMMENT '创建时间'
+) COMMENT '学习记录';
+
+
+CREATE TABLE problem(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+  content VARCHAR(512) COMMENT '问题',
+  score TINYINT COMMENT '分数',
+  answer VARCHAR(512) COMMENT '答案',
+  type TINYINT COMMENT '类型',
+  object_id BIGINT COMMENT '类型 id',
+  order_number TINYINT COMMENT '排序',
+  create_time DATETIME DEFAULT now() COMMENT '创建时间'
+) COMMENT '题库';
+
+CREATE TABLE answer(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+  content VARCHAR(512) COMMENT '回答内容',
+  score TINYINT COMMENT '分数',
+  type TINYINT COMMENT '类型',
+  object_id BIGINT COMMENT '类型 id',
+  student_id TINYINT COMMENT '学生 id'
+) COMMENT '回答';
+
+CREATE TABLE exam (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+  lesson_id BIGINT COMMENT '课程 id',
+  name VARCHAR(64) COMMENT '考试名称',
+  create_time DATETIME COMMENT '创建时间',
+  during_time INT COMMENT '考试时间'
+) COMMENT '考试';
+
+CREATE  TABLE exercise(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+  chapter_id BIGINT COMMENT '章节 id',
+  name VARCHAR(64) COMMENT '练习名称',
+  create_time DATETIME COMMENT '创建时间'
+) COMMENT '练习';
+
+CREATE TABLE study_star_score(
+  id BIGINT PRIMARY KEY  AUTO_INCREMENT COMMENT 'id',
+  lesson_id BIGINT COMMENT '课程 id',
+  type TINYINT COMMENT '学习之星类型',
+  precent TINYINT COMMENT '学习之星百分比'
+)COMMENT '学习之星配置';

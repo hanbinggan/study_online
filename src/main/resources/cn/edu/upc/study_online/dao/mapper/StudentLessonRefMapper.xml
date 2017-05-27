@@ -15,7 +15,7 @@
     </sql>
 
     <insert id="insert">
-        <selectKey keyProperty="id"  resultType="java.lang.Long" order="AFTER">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
             SELECT
             LAST_INSERT_ID()
         </selectKey>
@@ -66,5 +66,13 @@
         FROM student_lesson_ref
         WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
         AND status=#{status, jdbcType=TINYINT}
+    </select>
+
+    <select id="queryByStudentLesson" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM student_lesson_ref
+        WHERE student_id=#{studentId, jdbcType=BIGINT}
+          AND lesson_id=#{lessonId, jdbcType=BIGINT}
     </select>
 </mapper>

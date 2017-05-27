@@ -1,5 +1,6 @@
 package cn.edu.upc.study_online.controller.lesson;
 
+import cn.edu.upc.study_online.controller.vo.LessonVo;
 import cn.edu.upc.study_online.dao.dao.LessonChapterDao;
 import cn.edu.upc.study_online.dao.dao.LessonDao;
 import cn.edu.upc.study_online.dao.object.LessonChapterDo;
@@ -37,7 +38,7 @@ public class LessonController {
                          HttpServletRequest request) {
 
         Map<String, Object> user = (Map<String, Object>) request.getSession().getAttribute("user");
-        if (user == null) {
+        if (user == null || !"teacher".equals(user.get("role"))) {
             return "redirect:/login";
         }
         Long id = (Long) user.get("id");
@@ -95,5 +96,12 @@ public class LessonController {
     public String delete(@RequestParam("id") Long id) {
         lessonService.delete(id);
         return "redirect:/lesson";
+    }
+
+    @RequestMapping("/all")
+    public String allLesson(Model model){
+        List<LessonVo> lessonVoList = lessonService.getAllLesson();
+        model.addAttribute("lesson_list", lessonVoList);
+        return "student/lesson_list";
     }
 }

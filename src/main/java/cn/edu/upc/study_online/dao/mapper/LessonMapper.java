@@ -15,4 +15,6 @@ public interface LessonMapper {
     Long update(LessonDo lessonDo);
     Long delete(Long id);
     List<LessonDo> selectByCreator(Long creatorId);
+    List<LessonDo> selectAll();
+    List<LessonDo> selectByIds(List<Long> lessonIds);
 }

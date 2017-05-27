@@ -34,4 +34,12 @@ public class LessonDao {
     public List<LessonDo> selectByCreator(Long creatorId){
         return lessonMapper.selectByCreator(creatorId);
     }
+
+    public List<LessonDo> selectAll(){
+        return lessonMapper.selectAll();
+    }
+
+    public List<LessonDo> selectByIds(List<Long> lessonIds){
+        return lessonMapper.selectByIds(lessonIds);
+    }
 }
