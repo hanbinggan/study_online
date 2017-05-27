@@ -120,6 +120,7 @@ CREATE TABLE answer(
   score TINYINT COMMENT '分数',
   type TINYINT COMMENT '类型',
   object_id BIGINT COMMENT '类型 id',
+  problem_id BIGINT COMMENT '问题 id',
   student_id TINYINT COMMENT '学生 id'
 ) COMMENT '回答';
 
@@ -128,7 +129,8 @@ CREATE TABLE exam (
   lesson_id BIGINT COMMENT '课程 id',
   name VARCHAR(64) COMMENT '考试名称',
   create_time DATETIME COMMENT '创建时间',
-  during_time INT COMMENT '考试时间'
+  during_time INT COMMENT '考试时间',
+  status TINYINT COMMENT '状态'
 ) COMMENT '考试';
 
 CREATE  TABLE exercise(

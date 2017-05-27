@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--/**-->
+<!--* CREATE TABLE study_record(-->
+<!--* id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',-->
+<!--* student_id BIGINT COMMENT '学生 id',-->
+<!--* lesson_id BIGINT COMMENT '课程 id',-->
+<!--* type TINYINT COMMENT '产生积分类型',-->
+<!--* object_id BIGINT COMMENT '对象 id',-->
+<!--* study_star_record BIGINT COMMENT '学习积分',-->
+<!--* create_time DATETIME COMMENT '创建时间'-->
+<!--* ) COMMENT '学习记录';-->
+<!--*/-->
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.StudyRecordMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.StudyRecordDo">
+        <result column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="student_id" property="studentId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="lesson_id" property="lessonId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="type" property="type" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="object_id" property="objectId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="study_star_score" property="studyStarScore" jdbcType="BIGINT" javaType="Long"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, student_id, lesson_id, type, object_id, study_star_score, create_time
+    </sql>
+
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into study_record (
+        <include refid="BaseColumnList"/>
+        ) values (
+        #{id,jdbcType=BIGINT},
+        #{studentId, jdbcType=BIGINT},
+        #{lessonId, jdbcType=BIGINT},
+        #{type, jdbcType=TINYINT},
+        #{objectId, jdbcType=BIGINT},
+        #{studyStarScore, jdbcType=BIGINT},
+        now())
+    </insert>
+
+    <update id="update">
+        UPDATE study_record
+        SET
+        content=#{content, jdbcType=VARCHAR},
+        student_id=#{studentId, jdbcType=BIGINT},
+        lesson_id=#{lessonId, jdbcType=BIGINT},
+        type=#{type, jdbcType=TINYINT},
+        object_id=#{objectId, jdbcType=BIGINT},
+        study_star_score=#{studyStarScore, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM study_record
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM study_record
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+    <select id="queryByLesson" resultType="java.util.List" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM study_record
+        WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
+    </select>
+</mapper>

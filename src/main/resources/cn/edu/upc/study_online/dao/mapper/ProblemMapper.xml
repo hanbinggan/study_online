@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--/**-->
+<!--* CREATE TABLE problem(-->
+<!--* id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',-->
+<!--* content VARCHAR(512) COMMENT '问题',-->
+<!--* score TINYINT COMMENT '分数',-->
+<!--* problem VARCHAR(512) COMMENT '答案',-->
+<!--* type TINYINT COMMENT '类型',-->
+<!--* object_id BIGINT COMMENT '类型 id',-->
+<!--* order_number TINYINT COMMENT '排序',-->
+<!--* create_time DATETIME DEFAULT now() COMMENT '创建时间'-->
+<!--* ) COMMENT '题库';-->
+<!--*/-->
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.ProblemMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.ProblemDo">
+        <result column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="content" property="content" jdbcType="VARCHAR" javaType="String"/>
+        <result column="score" property="score" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="type" property="type" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="object_id" property="objectId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="order_number" property="orderNumber" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, content, score, `type`, object_id, order_number, create_time
+    </sql>
+
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into problem (
+        <include refid="BaseColumnList"/>
+        ) values (
+        #{id,jdbcType=BIGINT},
+        #{content, jdbcType=VARCHAR},
+        #{score, jdbcType=TINYINT},
+        #{type, jdbcType=TINYINT},
+        #{objectId, jdbcType=BIGINT},
+        #{orderNumber, jdbcType=TINYINT},
+        now()
+    </insert>
+
+    <update id="update">
+        UPDATE problem
+        SET
+        content=#{content, jdbcType=VARCHAR},
+        score=#{score, jdbcType=TINYINT},
+        type=#{type, jdbcType=TINYINT},
+        object_id=#{objectId, jdbcType=BIGINT},
+        order_number=#{orderNumber, jdbcType=TINYINT}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM problem
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM problem
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+    <select id="queryByObject" resultType="java.util.List" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM problem
+        WHERE object_id=#{objectId, jdbcType=BIGINT}
+        AND type=#{type, jdbcType=TINYINT}
+    </select>
+</mapper>

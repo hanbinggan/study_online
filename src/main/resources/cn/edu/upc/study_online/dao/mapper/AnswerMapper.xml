@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--/**-->
+<!--* CREATE TABLE answer(-->
+<!--* id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',-->
+<!--* content VARCHAR(512) COMMENT '回答内容',-->
+<!--* score TINYINT COMMENT '分数',-->
+<!--* type TINYINT COMMENT '类型',-->
+<!--* object_id BIGINT COMMENT '类型 id',-->
+<!--* student_id TINYINT COMMENT '学生 id'-->
+<!--* ) COMMENT '回答';-->
+<!--*/-->
+<!--id	bigint(20)-->
+<!--content	varchar(512)-->
+<!--score	tinyint(4)-->
+<!--type	tinyint(4)-->
+<!--object_id	bigint(20)-->
+<!--problem_id	bigint(20)-->
+<!--student_id	tinyint(4)-->
+
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.AnswerMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.AnswerDo">
+        <result column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="content" property="content" jdbcType="VARCHAR" javaType="String"/>
+        <result column="score" property="score" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="type" property="type" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="object_id" property="objectId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="student_id" property="studentId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="problem_id" property="problemId" jdbcType="BIGINT" javaType="Long"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, content, score, `type`, object_id, student_id, problem_id
+    </sql>
+
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into answer (
+        <include refid="BaseColumnList"/>
+        ) values (
+        #{id,jdbcType=BIGINT},
+        #{content,jdbcType=VARCHAR},
+        #{score,jdbcType=TINYINT},
+        #{type,jdbcType=TINYINT},
+        #{objectId, jdbcType=BIGINT},
+        #{studentId, jdbcType=BIGINT},
+        #{problemId, jdbcType=BIGINT})
+    </insert>
+
+    <update id="update">
+    UPDATE answer
+    SET
+    content=#{content, jdbcType=VARCHAR},
+    score=#{score, jdbcType=TINYINT},
+    type=#{type, jdbcType=TINYINT},
+    object_id=#{objectId, jdbcType=BIGINT},
+    student_id=#{studentId, jdbcType=BIGINT},
+    problem_id=#{problemId, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+    DELETE FROM answer
+    WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM answer
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+    <select id="queryByObject" resultType="java.util.List" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM answer
+        WHERE object_id=#{objectId, jdbcType=BIGINT}
+        AND type=#{type, jdbcType=TINYINT}
+    </select>
+</mapper>

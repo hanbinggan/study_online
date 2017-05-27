@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--/**-->
+<!--* CREATE TABLE exam (-->
+<!--* id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',-->
+<!--* lesson_id BIGINT COMMENT '课程 id',-->
+<!--* name VARCHAR(64) COMMENT '考试名称',-->
+<!--* create_time DATETIME COMMENT '创建时间',-->
+<!--* during_time INT COMMENT '考试时间',-->
+<!--* status TINYINT COMMENT '状态'-->
+<!--* ) COMMENT '考试';-->
+<!--*/-->
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.ExamMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.ExamDo">
+        <result column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="lesson_id" property="lessonId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="during_time" property="duringTime" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="status" property="status" jdbcType="TINYINT" javaType="Integer"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, name, lesson_id, create_time, during_time, status
+    </sql>
+
+
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into exam (
+        <include refid="BaseColumnList"/>
+        ) values (
+        #{id,jdbcType=BIGINT},
+        #{name, jdbcType=VARCHAR},
+        #{lessonId, jdbcType=BIGINT},
+        now(),
+        #{duringTime, jdbcType=INTEGER},
+        #{status, jdbcType=INTEGER})
+    </insert>
+    
+    
+
+    <update id="update">
+        UPDATE exam
+        SET
+        name=#{name, jdbcType=VARCHAR},
+        lesson_id=#{lessonId, jdbcType=BIGINT},
+        during_time=#{duringTime, jdbcType=INTEGER},
+        status=#{status, jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM exam
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM exam
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+    <select id="queryByLesson" resultType="java.util.List" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM exam
+        WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
+        AND status=#{status, jdbcType=TINYINT}
+    </select>
+</mapper>

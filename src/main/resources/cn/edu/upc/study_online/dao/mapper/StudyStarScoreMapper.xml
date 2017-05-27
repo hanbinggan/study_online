@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--/**-->
+<!--* CREATE TABLE study_star_score(-->
+<!--* id BIGINT PRIMARY KEY  AUTO_INCREMENT COMMENT 'id',-->
+<!--* lesson_id BIGINT COMMENT '课程 id',-->
+<!--* type TINYINT COMMENT '学习之星类型',-->
+<!--* precent TINYINT COMMENT '学习之星百分比'-->
+<!--* )COMMENT '学习之星配置';-->
+<!--*/-->
+<mapper namespace="cn.edu.upc.study_online.dao.mapper.StudyStarScoreMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.StudyStarScoreDo">
+        <result column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="lesson_id" property="lessonId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="type" property="type" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="precent" property="precent" jdbcType="TINYINT" javaType="Integer"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, lesson_id, type, precent
+    </sql>
+
+
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into study_star_score (
+        <include refid="BaseColumnList"/>
+        ) values (
+        #{id,jdbcType=BIGINT},
+        #{lessonId, jdbcType=BIGINT},
+        #{type, jdbcType=TINYINT},
+        #{precent, jdbcType=TINYINT})
+    </insert>
+
+    <update id="update">
+        UPDATE study_star_score
+        SET
+        lesson_id=#{lessonId, jdbcType=BIGINT},
+        type=#{type, jdbcType=TINYINT},
+        precent=#{precent, jdbcType=TINYINT}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM study_star_score
+        WHERE id=#{id, jdbcType=BIGINT}
+    </delete>
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM study_star_score
+        WHERE id=#{id, jdbcType=BIGINT}
+    </select>
+    <select id="queryByLesson" resultType="java.util.List" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM study_star_score
+        WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
+    </select>
+</mapper>
