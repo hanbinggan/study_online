@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,10 +52,18 @@
             <ul class="nav navbar-nav navbar-right">
                 <%--<li><a href="#">Dashboard</a></li>--%>
                 <%--<li><a href="#">Settings</a></li>--%>
-                <li><a href="#">管理</a></li>
-                <li><a href="#">个人中心</a></li>
-                <li><a href="#">${sessionScope.user['name']}</a></li>
-                <li><a href="#">退出</a></li>
+
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user['name']}">
+                        <li><a href="#">管理</a></li>
+                        <li><a href="#">个人中心</a></li>
+                        <li><a href="#">${sessionScope.user['name']}</a></li>
+                        <li><a href="#">退出</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/login">登陆</a></li>
+                    </c:otherwise>
+                </c:choose>
 
             </ul>
         </div>
