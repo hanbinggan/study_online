@@ -1,4 +1,5 @@
-create database study_online;
+create database IF NOT EXISTS study_online;
+use study_online;
 CREATE TABLE admin
 (
   id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
