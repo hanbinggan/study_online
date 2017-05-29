@@ -21,11 +21,33 @@ import java.util.Date;
 public class ProblemDo {
     private Long id;
     private String content;
+    private String answer;
     private Integer score;
     private Integer type;
     private Long objectId;
     private Integer orderNumber;
     private Date createTime;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public enum TYPE {
+        exercise(1), exam(2);
+        private final int val;
+
+        TYPE(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+    }
 
     public Long getId() {
         return id;

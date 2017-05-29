@@ -20,4 +20,7 @@ public interface StudyRecordMapper {
     Long delete(Long id);
 
     List<StudyRecordDo> queryByLesson(@Param("lessonId") Long lessonId);
+
+    StudyRecordDo queryByObjectStudent(@Param("type") Integer type, @Param("objectId") Long objectId,
+                                       @Param("studentId") Long studentId);
 }

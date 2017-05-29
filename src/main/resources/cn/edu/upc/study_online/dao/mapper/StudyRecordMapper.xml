@@ -70,4 +70,13 @@
         FROM study_record
         WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
     </select>
+
+    <select id="queryByObjectStudent" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM study_record
+        WHERE object_id=#{objectId, jdbcType=BIGINT}
+        AND student_id=#{studentId, jdbcType=BIGINT}
+        AND type=#{type, jdbcType=TINYINT}
+    </select>
 </mapper>

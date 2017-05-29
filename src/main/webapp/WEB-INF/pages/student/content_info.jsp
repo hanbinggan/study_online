@@ -17,7 +17,9 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <%--<h1 class="page-header">课程管理</h1>--%>
-    <h3 class="sub-header">${lesson_content.name}--课程内容详情</h3>
+    <h3 class="sub-header">${lesson_content.name}--课程内容详情
+    </h3>
+
     <div class="row placeholders">
         <div class='embed-responsive' style='padding-bottom:70%'>
             <object data="<%=path%>/lesson/content/file?file_name=${file_uri}" width="100%"
@@ -26,9 +28,43 @@
                         type="${file_type}"
                     </c:if>
             ></object>
-            <%--<object data="/resources/img/2021.swf" width="100%"--%>
-            <%--height="100%">--%>
-            </object>
         </div>
+    </div>
+    <h3 class="sub-header">学习笔记
+    </h3>
+    <div class="row placeholders">
+        <form:form class="form-horizontal" method="post" modelAttribute="lesson_note"
+                   action="/student/lesson/note/add">
+            <form:input path="lessonContentId" type="hidden"/>
+            <div class="form-group">
+                <label for="exampleTextarea" class="col-sm-2 control-label">笔记内容</label>
+                <div class="col-sm-5">
+                    <form:textarea path="content" type="text" class="form-control" id="exampleTextarea"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-9">
+                    <button type="submit" class="btn btn-default">增加笔记</button>
+                </div>
+            </div>
+        </form:form>
+    </div>
+
+    <div class="row placeholders">
+        <form class="form-horizontal" method="post">
+            <c:forEach items="${lesson_notes}" var="lesson_note">
+                <div class="form-group">
+                    <label for="exampleTextarea" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" id="exampleTextarea" readonly> ${lesson_note.content}</textarea>
+                        <div class="pull-right">
+                            <fmt:formatDate value="${lesson_note.createTime}"/>
+                        </div>
+
+                    </div>
+                </div>
+            </c:forEach>
+        </form>
     </div>
     <jsp:include page="../footer.jsp"/>

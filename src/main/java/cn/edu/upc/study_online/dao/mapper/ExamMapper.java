@@ -11,9 +11,10 @@ import java.util.List;
  */
 @Repository
 public interface ExamMapper {
-//    Long insert(ExamDo examDo);
+    Long insert(ExamDo examDo);
     Long update(ExamDo examDo);
     Long delete(Long id);
     ExamDo queryById(Long id);
     List<ExamDo> queryByLessonStatus(@Param("LessonId") Long lessonId, @Param("status")Integer status);
+    List<ExamDo> queryByLesson(@Param("LessonId") Long lessonId);
 }

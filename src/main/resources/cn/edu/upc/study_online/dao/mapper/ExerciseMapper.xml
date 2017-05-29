@@ -17,7 +17,7 @@
     </resultMap>
 
     <sql id="BaseColumnList">
-        id, name, cbapter_id, create_time
+        id, name, chapter_id, create_time
     </sql>
 
     <insert id="insert">
@@ -31,14 +31,14 @@
         #{id,jdbcType=BIGINT},
         #{name, jdbcType=VARCHAR},
         #{chapterId, jdbcType=VARCHAR},
-        now()
+        now())
     </insert>
 
     <update id="update">
         UPDATE exercise
         SET
-        name=#{name, jdbcType=VARCHAR},
-        chapter_id=#{chapterId, jdbcType=BIGINT},
+        name=#{name, jdbcType=VARCHAR}
+        where id=#{id, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">

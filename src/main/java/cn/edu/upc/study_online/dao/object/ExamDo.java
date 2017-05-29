@@ -7,21 +7,24 @@ package cn.edu.upc.study_online.dao.object;
 import java.util.Date;
 
 /**
- * CREATE TABLE exam (
- * id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
- * lesson_id BIGINT COMMENT '课程 id',
- * name VARCHAR(64) COMMENT '考试名称',
- * create_time DATETIME COMMENT '创建时间',
- * during_time INT COMMENT '考试时间',
- * status TINYINT COMMENT '状态'
- * ) COMMENT '考试';
+ * CREATE TABLE `exam` (
+ * `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+ * `lesson_id` bigint(20) DEFAULT NULL COMMENT '课程 id',
+ * `name` varchar(64) DEFAULT NULL COMMENT '考试名称',
+ * `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+ * start_time DATETIME COMMENT '考试开始时间',
+ * `end_time` DATETIME DEFAULT NULL COMMENT '考试结束时间',
+ * `status` tinyint(4) DEFAULT NULL COMMENT '状态',
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='考试'
  */
 public class ExamDo {
     private Long id;
     private Long lessonId;
     private String name;
     private Date createTime;
-    private Integer duringTime;
+    private Date startTime;
+    private Date endTime;
     private Integer status;
 
 
@@ -37,14 +40,6 @@ public class ExamDo {
         public int getValue() {
             return value;
         }
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public Long getId() {
@@ -79,11 +74,27 @@ public class ExamDo {
         this.createTime = createTime;
     }
 
-    public Integer getDuringTime() {
-        return duringTime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setDuringTime(Integer duringTime) {
-        this.duringTime = duringTime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

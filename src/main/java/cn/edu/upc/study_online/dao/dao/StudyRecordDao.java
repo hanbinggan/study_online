@@ -15,23 +15,29 @@ import java.util.List;
 public class StudyRecordDao {
     @Autowired
     private StudyRecordMapper studyRecordMapper;
-    public StudyRecordDo queryById(Long id){
+
+    public StudyRecordDo queryById(Long id) {
         return studyRecordMapper.queryById(id);
     }
 
-    public Long insert(StudyRecordDo studyRecordDo){
+    public Long insert(StudyRecordDo studyRecordDo) {
         return studyRecordMapper.insert(studyRecordDo);
     }
 
-    public Long update(StudyRecordDo studyRecordDo){
+    public Long update(StudyRecordDo studyRecordDo) {
         return studyRecordMapper.update(studyRecordDo);
     }
 
-    public Long delete(Long id){
+    public Long delete(Long id) {
         return studyRecordMapper.delete(id);
     }
 
-    public List<StudyRecordDo> queryByLesson(@Param("lessonId") Long lessonId){
+    public List<StudyRecordDo> queryByLesson(Long lessonId) {
         return studyRecordMapper.queryByLesson(lessonId);
     }
+
+    public StudyRecordDo queryByObjectStudent(Integer type, Long objectId, Long studentId) {
+        return studyRecordMapper.queryByObjectStudent(type, objectId, studentId);
+    }
+
 }

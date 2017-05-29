@@ -35,4 +35,8 @@ public class ExamDao {
     public List<ExamDo> queryByLessonStatus(Long lessonId, Integer status) {
         return examMapper.queryByLessonStatus(lessonId, status);
     }
+
+    public List<ExamDo> queryByLesson(Long lessonId){
+        return examMapper.queryByLesson(lessonId);
+    }
 }

@@ -92,16 +92,16 @@ CREATE TABLE lesson_note(
 ) COMMENT '课程笔记';
 
 
-CREATE TABLE study_record(
-  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
-  student_id BIGINT COMMENT '学生 id',
-  lesson_id BIGINT COMMENT '课程 id',
-  type TINYINT COMMENT '产生积分类型',
-  object_id BIGINT COMMENT '对象 id',
-  study_star_record BIGINT COMMENT '学习积分',
-  create_time DATETIME COMMENT '创建时间'
-) COMMENT '学习记录';
 
+CREATE TABLE `study_record` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `student_id` bigint(20) DEFAULT NULL COMMENT '学生 id',
+  `lesson_id` bigint(20) DEFAULT NULL COMMENT '课程 id',
+  `type` tinyint(4) DEFAULT NULL COMMENT '产生积分类型',
+  `object_id` bigint(20) DEFAULT NULL COMMENT '对象 id',
+  `study_star_score` bigint(20) DEFAULT NULL COMMENT '学习积分',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
 
 CREATE TABLE problem(
   id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',

@@ -20,4 +20,6 @@ public interface ProblemMapper {
     Long delete(Long id);
 
     List<ProblemDo> queryByObject(@Param("type") Integer type, @Param("objectId") Long objectId);
+
+    Long deleteByObjectType(@Param("objectId") Long objectId, @Param("type") Integer type);
 }

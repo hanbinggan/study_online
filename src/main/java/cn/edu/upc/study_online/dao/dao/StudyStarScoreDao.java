@@ -28,7 +28,7 @@ public class StudyStarScoreDao {
         return studyStarScoreMapper.update(studyStarScoreDo);
     }
 
-    public List<StudyStarScoreDo> queryByLesson(@Param("lessonId") Long lessonId) {
-        return studyStarScoreMapper.queryByLesson(lessonId);
+    public StudyStarScoreDo queryByLessonType(Long lessonId, Integer type) {
+        return studyStarScoreMapper.queryByLessonType(lessonId, type);
     }
 }

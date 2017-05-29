@@ -16,6 +16,7 @@
     <resultMap id="BaseResultMap" type="cn.edu.upc.study_online.dao.object.ProblemDo">
         <result column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
         <result column="content" property="content" jdbcType="VARCHAR" javaType="String"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR" javaType="String"/>
         <result column="score" property="score" jdbcType="TINYINT" javaType="Integer"/>
         <result column="type" property="type" jdbcType="TINYINT" javaType="Integer"/>
         <result column="object_id" property="objectId" jdbcType="BIGINT" javaType="Long"/>
@@ -24,7 +25,7 @@
     </resultMap>
 
     <sql id="BaseColumnList">
-        id, content, score, `type`, object_id, order_number, create_time
+        id, content, answer, score, `type`, object_id, order_number, create_time
     </sql>
 
     <insert id="insert">
@@ -37,21 +38,24 @@
         ) values (
         #{id,jdbcType=BIGINT},
         #{content, jdbcType=VARCHAR},
+        #{answer, jdbcType=VARCHAR},
         #{score, jdbcType=TINYINT},
         #{type, jdbcType=TINYINT},
         #{objectId, jdbcType=BIGINT},
         #{orderNumber, jdbcType=TINYINT},
-        now()
+        now())
     </insert>
 
     <update id="update">
         UPDATE problem
         SET
         content=#{content, jdbcType=VARCHAR},
+        answer=#{answer, jdbcType=VARCHAR},
         score=#{score, jdbcType=TINYINT},
         type=#{type, jdbcType=TINYINT},
         object_id=#{objectId, jdbcType=BIGINT},
         order_number=#{orderNumber, jdbcType=TINYINT}
+        WHERE id=#{id, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">
@@ -71,4 +75,11 @@
         WHERE object_id=#{objectId, jdbcType=BIGINT}
         AND type=#{type, jdbcType=TINYINT}
     </select>
+
+    <delete id="deleteByObjectType">
+        DELETE
+        FROM problem
+        WHERE object_id=#{objectId, jdbcType=BIGINT}
+        AND type=#{type, jdbcType=TINYINT}
+    </delete>
 </mapper>

@@ -41,6 +41,7 @@
         lesson_id=#{lessonId, jdbcType=BIGINT},
         type=#{type, jdbcType=TINYINT},
         precent=#{precent, jdbcType=TINYINT}
+        WHERE id=#{id, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">
@@ -53,10 +54,11 @@
         FROM study_star_score
         WHERE id=#{id, jdbcType=BIGINT}
     </select>
-    <select id="queryByLesson" resultType="java.util.List" resultMap="BaseResultMap">
+    <select id="queryByLessonType" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumnList"/>
         FROM study_star_score
         WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
+        AND  type=#{type, jdbcType=TINYINT}
     </select>
 </mapper>

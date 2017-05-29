@@ -1,10 +1,7 @@
 package cn.edu.upc.study_online.controller.student;
 
 import cn.edu.upc.study_online.controller.vo.LessonVo;
-import cn.edu.upc.study_online.dao.dao.LessonChapterDao;
-import cn.edu.upc.study_online.dao.dao.LessonContentDao;
-import cn.edu.upc.study_online.dao.dao.LessonDao;
-import cn.edu.upc.study_online.dao.dao.StudentLessonRefDao;
+import cn.edu.upc.study_online.dao.dao.*;
 import cn.edu.upc.study_online.dao.object.*;
 import cn.edu.upc.study_online.service.FileService;
 import cn.edu.upc.study_online.service.StudentLessonRefService;
@@ -12,6 +9,7 @@ import cn.edu.upc.study_online.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +40,12 @@ public class StudentLessonController {
 
     @Autowired
     private LessonDao lessonDao;
+
+    @Autowired
+    private LessonNoteDao lessonNoteDao;
+
+    @Autowired
+    private StudyRecordDao studyRecordDao;
 
     @RequestMapping("/lesson")
     public String myLesson(Model model, HttpServletRequest request) {
@@ -109,7 +113,15 @@ public class StudentLessonController {
     }
 
     @RequestMapping("/lesson/content/info")
-    public String contentInfo(@RequestParam("id") Long contentId, Model model) {
+    public String contentInfo(@RequestParam("id") Long contentId, Model model,
+                              HttpServletRequest request) {
+        Map<String, Object> user = (Map<String, Object>) request.getSession().getAttribute("user");
+        if (user == null || !"student".equals((String) user.get("role"))) {
+            return "redirect:/login";
+        }
+
+        Long studentId = (Long) user.get("id");
+
         LessonContentDo lessonContentDo = lessonContentDao.queryById(contentId);
         model.addAttribute("lesson_content", lessonContentDo);
 
@@ -122,9 +134,33 @@ public class StudentLessonController {
         model.addAttribute("file_uri", fileName);
         model.addAttribute("file_type", contentType);
 
-        //todo exercise
-        //todo study star
-        //todo note
+        LessonNoteDo lessonNoteDo = new LessonNoteDo();
+        lessonNoteDo.setLessonContentId(lessonContentDo.getId());
+        model.addAttribute("lesson_note", lessonNoteDo);
+
+        List<LessonNoteDo> lessonNoteDoList = lessonNoteDao.queryByContent(lessonContentDo.getId());
+        model.addAttribute("lesson_notes", lessonNoteDoList);
+
+
+        StudyRecordDo studyRecordDo = studyRecordDao
+                .queryByObjectStudent(StudyStarScoreDo.TYPE.study.getVal(), contentId, studentId);
+        if (studyRecordDo == null) {
+            studyRecordDo = new StudyRecordDo();
+            studyRecordDo.setObjectId(contentId);
+            studyRecordDo.setStudentId(studentId);
+            studyRecordDo.setType(StudyStarScoreDo.TYPE.study.getVal());
+
+            LessonChapterDo lessonChapterDo = lessonChapterDao.queryById(lessonContentDo.getLessonChapterId());
+            studyRecordDo.setLessonId(lessonChapterDo.getLessonId());
+            studyRecordDo.setStudyStarScore(lessonContentDo.getStudyStarScore());
+            studyRecordDao.insert(studyRecordDo);
+        }
         return "student/content_info";
+    }
+
+    @RequestMapping("/lesson/note/add")
+    public String addNote(@ModelAttribute("lesson_note") LessonNoteDo lessonNoteDo, Model model) {
+        lessonNoteDao.insert(lessonNoteDo);
+        return "redirect:/student/lesson/content/info?id=" + lessonNoteDo.getLessonContentId();
     }
 }

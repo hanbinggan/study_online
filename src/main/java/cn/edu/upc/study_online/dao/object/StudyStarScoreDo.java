@@ -3,6 +3,7 @@ package cn.edu.upc.study_online.dao.object;
 /**
  * Created by songqiaolin on 2017/5/27.
  */
+
 /**
  * CREATE TABLE study_star_score(
  * id BIGINT PRIMARY KEY  AUTO_INCREMENT COMMENT 'id',
@@ -16,6 +17,22 @@ public class StudyStarScoreDo {
     private Long lessonId;
     private Integer type;
     private Integer precent;
+
+    public enum TYPE {
+        study(1),
+        exercise(2),
+        exam(3);
+
+        private final int val;
+
+        TYPE(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+    }
 
     public Long getId() {
         return id;

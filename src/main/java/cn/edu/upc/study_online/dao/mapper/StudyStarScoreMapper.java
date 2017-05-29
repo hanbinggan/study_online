@@ -17,5 +17,6 @@ public interface StudyStarScoreMapper {
 
     Long update(StudyStarScoreDo studyStarScoreDo);
 
-    List<StudyStarScoreDo> queryByLesson(@Param("lessonId") Long lessonId);
+    StudyStarScoreDo queryByLessonType(@Param("lessonId") Long lessonId,
+                                             @Param("type") Integer type);
 }

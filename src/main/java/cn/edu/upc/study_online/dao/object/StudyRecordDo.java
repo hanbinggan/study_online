@@ -23,7 +23,7 @@ public class StudyRecordDo {
     private Long lessonId;
     private Integer type;
     private Long objectId;
-    private Long studyStarRecord;
+    private Long studyStarScore;
     private Date createTime;
 
     public Long getId() {
@@ -66,12 +66,12 @@ public class StudyRecordDo {
         this.objectId = objectId;
     }
 
-    public Long getStudyStarRecord() {
-        return studyStarRecord;
+    public Long getStudyStarScore() {
+        return studyStarScore;
     }
 
-    public void setStudyStarRecord(Long studyStarRecord) {
-        this.studyStarRecord = studyStarRecord;
+    public void setStudyStarScore(Long studyStarScore) {
+        this.studyStarScore = studyStarScore;
     }
 
     public Date getCreateTime() {
