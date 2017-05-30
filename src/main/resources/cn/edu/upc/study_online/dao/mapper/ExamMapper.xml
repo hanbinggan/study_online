@@ -23,7 +23,7 @@
     </resultMap>
 
     <sql id="BaseColumnList">
-        id, name, lesson_id, create_time, start_time, end_time status
+        id, name, lesson_id, create_time, start_time, end_time
     </sql>
 
 
@@ -40,8 +40,7 @@
         #{lessonId, jdbcType=BIGINT},
         now(),
         #{startTime, jdbcType=TIMESTAMP},
-        #{endTime, jdbcType=TIMESTAMP},
-        #{status, jdbcType=INTEGER})
+        #{endTime, jdbcType=TIMESTAMP})
     </insert>
 
 
@@ -49,10 +48,9 @@
         UPDATE exam
         SET
         name=#{name, jdbcType=VARCHAR},
-        lesson_id=#{lessonId, jdbcType=BIGINT},
         start_time=#{startTime, jdbcType=TIMESTAMP},
-        end_time=#{endTime, jdbcType=TIMESTAMP},
-        status=#{status, jdbcType=INTEGER}
+        end_time=#{endTime, jdbcType=TIMESTAMP}
+        WHERE id=#{id, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">

@@ -16,7 +16,14 @@
 <jsp:include page="../left_bar.jsp"/>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">课程管理</h1>
-    <h3 class="sub-header"><a href="/lesson/chapter/exercise/info?id=${exercise.id}">${exercise.name}</a>--增加题库</h3>
+    <h3 class="sub-header">
+        <c:if test="${type eq 'exercise'}">
+            <a href="/lesson/chapter/exercise/info?id=${exercise.id}">${exercise.name}</a>
+        </c:if>
+        <c:if test="${type eq 'exam'}">
+            <a href="/lesson/exam/info?id=${exam.id}">${exam.name}</a>
+        </c:if>
+        --增加题库</h3>
     <div class="row placeholders">
         <form:form class="form-horizontal" method="post" modelAttribute="problem"
                    action="/lesson/problem/add">

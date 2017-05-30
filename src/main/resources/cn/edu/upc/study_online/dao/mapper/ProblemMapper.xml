@@ -74,6 +74,7 @@
         FROM problem
         WHERE object_id=#{objectId, jdbcType=BIGINT}
         AND type=#{type, jdbcType=TINYINT}
+        order by order_number
     </select>
 
     <delete id="deleteByObjectType">

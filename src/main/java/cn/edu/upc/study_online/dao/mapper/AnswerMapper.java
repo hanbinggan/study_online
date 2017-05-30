@@ -20,4 +20,6 @@ public interface AnswerMapper {
     Long delete(Long id);
 
     List<AnswerDo> queryByObject(@Param("type") Integer type, @Param("objectId") Long objectId);
+
+    AnswerDo queryByProblem(@Param("problemId") Long problemId);
 }

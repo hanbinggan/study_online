@@ -16,5 +16,5 @@ public interface ExamMapper {
     Long delete(Long id);
     ExamDo queryById(Long id);
     List<ExamDo> queryByLessonStatus(@Param("LessonId") Long lessonId, @Param("status")Integer status);
-    List<ExamDo> queryByLesson(@Param("LessonId") Long lessonId);
+    List<ExamDo> queryByLesson(@Param("lessonId") Long lessonId);
 }

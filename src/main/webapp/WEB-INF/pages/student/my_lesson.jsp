@@ -28,6 +28,7 @@
                 <th>老师</th>
                 <th>描述</th>
                 <th>创建时间</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +39,7 @@
                     <td>${lesson.teacherName}</td>
                     <td>${lesson.description}</td>
                     <td><fmt:formatDate value="${lesson.createTime}"/></td>
+                    <td><a href="/student/lesson/exam?id=${lesson.id}">参加考试</a> </td>
                 </tr>
             </c:forEach>
             </tbody>

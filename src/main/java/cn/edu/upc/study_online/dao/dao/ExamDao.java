@@ -16,9 +16,9 @@ public class ExamDao {
     @Autowired
     private ExamMapper examMapper;
 
-//    public Long insert(ExamDo examDo) {
-//        return examMapper.insert(examDo);
-//    }
+    public Long insert(ExamDo examDo) {
+        return examMapper.insert(examDo);
+    }
 
     public Long update(ExamDo examDo) {
         return examMapper.update(examDo);

@@ -26,6 +26,7 @@
                 <th>章节</th>
                 <th>描述</th>
                 <th>创建时间</th>
+                <th>练习</th>
             </tr>
             </thead>
             <tbody>
@@ -35,6 +36,7 @@
                     <td><a href="<%=path%>/student/lesson/content?id=${lessonChapter.id}">${lessonChapter.name}</a></td>
                     <td>${lessonChapter.description}</td>
                     <td><fmt:formatDate value="${lessonChapter.createTime}"/></td>
+                    <td><a href="<%=path%>/student/lesson/exercise?id=${lessonChapter.id}">进入练习</a></td>
                 </tr>
             </c:forEach>
             </tbody>

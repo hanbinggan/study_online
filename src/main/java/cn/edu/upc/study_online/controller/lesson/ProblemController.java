@@ -39,10 +39,12 @@ public class ProblemController {
         if("exercise".equals(type)){
             ExerciseDo exerciseDo = exerciseDao.queryById(id);
             model.addAttribute("exercise", exerciseDo);
+            model.addAttribute("type", "exercise");
             problemDo.setType(ProblemDo.TYPE.exercise.getVal());
         }else{
             ExamDo examDo = examDao.queryById(id);
             model.addAttribute("exam", examDo);
+            model.addAttribute("type", "exam");
             problemDo.setType(ProblemDo.TYPE.exam.getVal());
         }
         model.addAttribute("problem", problemDo);
@@ -59,9 +61,16 @@ public class ProblemController {
     @RequestMapping("/info")
     public String info(@RequestParam("id") Long problemId, Model model){
         ProblemDo problemDo = problemDao.queryById(problemId);
-        ExerciseDo exerciseDo = exerciseDao.queryById(problemDo.getObjectId());
         model.addAttribute("problem", problemDo);
-        model.addAttribute("exercise", exerciseDo);
+        if(problemDo.getType() == ProblemDo.TYPE.exercise.getVal()){
+            ExerciseDo exerciseDo = exerciseDao.queryById(problemDo.getObjectId());
+            model.addAttribute("exercise", exerciseDo);
+            model.addAttribute("type", "exercise");
+        }else{
+            ExamDo examDo = examDao.queryById(problemDo.getObjectId());
+            model.addAttribute("exam", examDo);
+            model.addAttribute("type", "exam");
+        }
         return "problem/problem_info";
     }
 
@@ -73,8 +82,9 @@ public class ProblemController {
 
     @RequestMapping("delete")
     public String delete(@RequestParam("id") Long problemId,
-                         @RequestParam("exercise_id") Long exerciseId){
+                         @RequestParam("object_id") Long objectId,
+                         @RequestParam("url") String url){
         problemDao.delete(problemId);
-        return "redirect:/lesson/chapter/exercise/info?id="+exerciseId;
+        return "redirect:/lesson/"+url+"?id="+objectId;
     }
 }

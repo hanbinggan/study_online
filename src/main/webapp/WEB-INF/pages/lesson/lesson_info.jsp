@@ -25,7 +25,7 @@
             <button type="button" class="btn btn-info" onclick="location.href='<%=path%>/lesson/study_star?id=${lesson.id}'">
                 设置学习之星
             </button>
-            <button type="button" class="btn btn-info" onclick="location.href='<%=path%>/lesson/study_star?id=${lesson.id}'">
+            <button type="button" class="btn btn-info" onclick="location.href='<%=path%>/lesson/exam?id=${lesson.id}'">
                 考试管理
             </button>
         </div>

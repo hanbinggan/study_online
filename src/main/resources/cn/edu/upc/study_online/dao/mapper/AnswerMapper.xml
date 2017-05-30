@@ -78,4 +78,11 @@
         WHERE object_id=#{objectId, jdbcType=BIGINT}
         AND type=#{type, jdbcType=TINYINT}
     </select>
+
+    <select id="queryByProblem" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM answer
+        WHERE problem_id=#{problemId, jdbcType=BIGINT}
+    </select>
 </mapper>

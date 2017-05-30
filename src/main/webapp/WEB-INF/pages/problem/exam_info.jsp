@@ -1,6 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: songqiaolin
+  Date: 2017/5/29
+  Time: 下午2:39
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: songqiaolin
   Date: 2017/5/28
   Time: 下午3:44
   To change this template use File | Settings | File Templates.
@@ -17,38 +24,45 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">课程管理</h1>
-    <h3 class="sub-header"><a href="/lesson/chapter/exercise?id=${lesson_chapter.id}">
-    ${lesson_chapter.name}</a>--章节练习详情
+    <h3 class="sub-header"><a href="/lesson/exam?id=${lesson.id}">${lesson.name}</a>--考试详情
     </h3>
     <div class="row placeholders">
-        <form:form class="form-horizontal" method="post" modelAttribute="exercise"
-                   action="/lesson/chapter/exercise/update">
-            <form:input path="chapterId" type="hidden"/>
+        <form class="form-horizontal" method="post"
+              action="/lesson/exam/update">
+            <input name="lessonId" type="hidden" value="${exam.lessonId}"/>
+            <input name="id" type="hidden" value="${exam.id}"/>
             <div class="form-group">
-                <label for="id" class="col-sm-2 control-label">id</label>
+                <label for="name" class="col-sm-2 control-label">考试名称</label>
                 <div class="col-sm-5">
-                    <form:input path="id" type="text" class="form-control" id="id"
-                                readonly="true" value="${id}"/>
+                    <input name="name" type="text" class="form-control" id="name" value="${exam.name}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="start_time" class="col-sm-2 control-label">考试开始时间</label>
+                <div class="col-sm-5">
+                    <input name="startTime" class="form-control" type="text" id="start_time"
+                           value="<fmt:formatDate value="${exam.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">练习名称</label>
+                <label for="end_time" class="col-sm-2 control-label">考试结束时间</label>
                 <div class="col-sm-5">
-                    <form:input path="name" type="text" class="form-control" id="name"
-                                value="${name}"/>
+                    <input name="endTime" class="form-control" type="text" id="end_time"
+                           value="<fmt:formatDate value="${exam.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-9">
-                    <button type="submit" class="btn btn-default">修改练习</button>
+                    <button type="submit" class="btn btn-default">修改考试</button>
                 </div>
             </div>
-        </form:form>
+        </form>
     </div>
     <h3 class="sub-header">题目列表
         <button type="button" class="btn btn-primary pull-right"
-                onclick="location.href='<%=path%>/lesson/problem/add?id=${exercise.id}&type=exercise';">增加题目
+                onclick="location.href='<%=path%>/lesson/problem/add?id=${exam.id}&type=exam';">增加题目
         </button>
     </h3>
     <div class="table-responsive">
@@ -71,7 +85,8 @@
                     <td>${problem.answer}</td>
                     <td>${problem.orderNumber}</td>
                     <td>${problem.score}</td>
-                    <td><a href="<%=path%>/lesson/problem/delete?id=${problem.id}&object_id=${exercise.id}&url=exercise/info">删除</a>
+                    <td>
+                        <a href="<%=path%>/lesson/problem/delete?id=${problem.id}&object_id=${exam.id}&url=exam/info">删除</a>
                     </td>
                 </tr>
             </c:forEach>

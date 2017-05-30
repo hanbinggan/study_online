@@ -35,7 +35,7 @@
             <c:forEach items="${lesson_list}" var="lesson">
                 <tr>
                     <td>${lesson.id}</td>
-                    <td><a href="<%=path%>/lesson/info?id=${lesson.id}">${lesson.name}</a></td>
+                    <td>${lesson.name}</td>
                     <td>${lesson.teacherName}</td>
                     <td>${lesson.description}</td>
                     <td><fmt:formatDate value="${lesson.createTime}"/></td>

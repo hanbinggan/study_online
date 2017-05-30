@@ -34,4 +34,9 @@ public class AnswerDao {
     public List<AnswerDo> queryByObject(Integer type, Long objectId) {
         return answerMapper.queryByObject(type, objectId);
     }
+
+    public AnswerDo queryByProblem(Long problemId){
+        return answerMapper.queryByProblem(problemId);
+    }
+
 }
