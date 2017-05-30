@@ -31,7 +31,7 @@
             <tbody>
             <c:forEach items="${applied_lesson}" var="lesson">
                 <tr>
-                    <td>${lesson.studentName}</td>
+                    <td><a href="/study/record?id=${lesson.studentId}&lesson_id=${lesson.lessonId}">${lesson.studentName}</a></td>
                     <td>10</td>
                     <td><fmt:formatDate value="${lesson.createTime}"/></td>
                 </tr>

@@ -64,11 +64,13 @@
         FROM study_record
         WHERE id=#{id, jdbcType=BIGINT}
     </select>
-    <select id="queryByLesson" resultType="java.util.List" resultMap="BaseResultMap">
+    <select id="queryByLessonStudent" resultType="java.util.List" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumnList"/>
         FROM study_record
         WHERE lesson_id=#{lessonId, jdbcType=BIGINT}
+        AND student_id=#{studentId, jdbcType=BIGINT}
+        ORDER BY create_time DESC
     </select>
 
     <select id="queryByObjectStudent" resultMap="BaseResultMap">

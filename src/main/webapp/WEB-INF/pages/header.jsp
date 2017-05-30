@@ -49,8 +49,6 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <%--<li><a href="#">Dashboard</a></li>--%>
-                <%--<li><a href="#">Settings</a></li>--%>
                 <li><a href="#">管理</a></li>
                 <li><a href="#">个人中心</a></li>
                 <li><a href="#">${sessionScope.user['name']}</a></li>

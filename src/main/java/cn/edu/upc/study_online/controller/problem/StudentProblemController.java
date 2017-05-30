@@ -1,4 +1,4 @@
-package cn.edu.upc.study_online.controller.student;
+package cn.edu.upc.study_online.controller.problem;
 
 import cn.edu.upc.study_online.dao.dao.*;
 import cn.edu.upc.study_online.dao.object.*;
@@ -120,12 +120,10 @@ public class StudentProblemController {
             ExamDo examDo = examDao.queryById(objectId);
             name = examDo.getName();
             toId = examDo.getLessonId();
-//            model.addAttribute("exam", examDo);
         } else {
             ExerciseDo exerciseDo = exerciseDao.queryById(objectId);
             name = exerciseDo.getName();
             toId = exerciseDo.getChapterId();
-//            model.addAttribute("exercise", exerciseDo);
         }
         model.addAttribute("name", name);
         model.addAttribute("type", type);

@@ -32,8 +32,8 @@ public class StudyRecordDao {
         return studyRecordMapper.delete(id);
     }
 
-    public List<StudyRecordDo> queryByLesson(Long lessonId) {
-        return studyRecordMapper.queryByLesson(lessonId);
+    public List<StudyRecordDo> queryByLessonStudent(Long lessonId, Long studentId) {
+        return studyRecordMapper.queryByLessonStudent(lessonId, studentId);
     }
 
     public StudyRecordDo queryByObjectStudent(Integer type, Long objectId, Long studentId) {

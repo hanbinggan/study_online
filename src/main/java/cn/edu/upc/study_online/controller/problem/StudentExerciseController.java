@@ -1,4 +1,4 @@
-package cn.edu.upc.study_online.controller.student;
+package cn.edu.upc.study_online.controller.problem;
 
 import cn.edu.upc.study_online.dao.dao.*;
 import cn.edu.upc.study_online.dao.object.*;

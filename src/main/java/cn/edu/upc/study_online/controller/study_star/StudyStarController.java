@@ -1,4 +1,4 @@
-package cn.edu.upc.study_online.controller.lesson;
+package cn.edu.upc.study_online.controller.study_star;
 
 import cn.edu.upc.study_online.dao.object.StudyStarScoreDo;
 import cn.edu.upc.study_online.service.StudyStarScoreService;
@@ -30,7 +30,7 @@ public class StudyStarController {
         model.addAttribute("study", study);
         model.addAttribute("exercise", exercise);
         model.addAttribute("exam", exam);
-        return "lesson/study_star";
+        return "study_star/study_star";
     }
 
     @RequestMapping(value = "/update"

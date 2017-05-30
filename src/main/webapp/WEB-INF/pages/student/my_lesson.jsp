@@ -39,7 +39,10 @@
                     <td>${lesson.teacherName}</td>
                     <td>${lesson.description}</td>
                     <td><fmt:formatDate value="${lesson.createTime}"/></td>
-                    <td><a href="/student/lesson/exam?id=${lesson.id}">参加考试</a> </td>
+                    <td>
+                        <a href="/student/lesson/exam?id=${lesson.id}">参加考试</a>/
+                        <a href="/study/record?id=${sessionScope.user['id']}&lesson_id=${lesson.id}">学习记录</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

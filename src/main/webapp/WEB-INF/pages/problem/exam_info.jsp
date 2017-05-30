@@ -5,13 +5,6 @@
   Time: 下午2:39
   To change this template use File | Settings | File Templates.
 --%>
-<%--
-  Created by IntelliJ IDEA.
-  User: songqiaolin
-  Date: 2017/5/28
-  Time: 下午3:44
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -23,7 +16,7 @@
 <jsp:include page="../left_bar.jsp"/>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="page-header">课程管理</h1>
+    <h1 class="page-header">${student.name}--学习记录</h1>
     <h3 class="sub-header"><a href="/lesson/exam?id=${lesson.id}">${lesson.name}</a>--考试详情
     </h3>
     <div class="row placeholders">

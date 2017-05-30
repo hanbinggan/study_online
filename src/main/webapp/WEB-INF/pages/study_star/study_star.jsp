@@ -16,7 +16,14 @@
 <jsp:include page="../left_bar.jsp"/>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="page-header">课程管理</h1>
+    <h1 class="page-header">课程管理
+        <div class="pull-right btn-group" role="group">
+            <button type="button" class="btn btn-info"
+                    onclick="location.href='<%=path%>/study/record/top?id=${study.lessonId}'">
+                学习之星排名
+            </button>
+        </div>
+    </h1>
     <h3 class="sub-header">学习之星</h3>
     <div class="row placeholders">
         <form class="form-horizontal" method="post"

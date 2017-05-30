@@ -39,7 +39,7 @@ public class ManageStudentController {
         model.addAttribute("applied_lesson", appliedLesson);
         model.addAttribute("applying_lesson", applyingLesson);
         model.addAttribute("lesson", lessonDo);
-        return "student/lesson_student_manage";
+        return "lesson/lesson_student_manage";
     }
 
     @RequestMapping("/join")
