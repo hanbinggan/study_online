@@ -1,3 +1,4 @@
+DROP database if exists study_online;
 create database study_online;
 CREATE TABLE admin
 (
@@ -6,6 +7,33 @@ CREATE TABLE admin
   password VARCHAR(50) NOT NULL COMMENT '密码'
 );
 CREATE UNIQUE INDEX name ON admin (name);
+CREATE TABLE answer
+(
+  id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  content VARCHAR(512) COMMENT '回答内容',
+  score TINYINT(4) COMMENT '分数',
+  type TINYINT(4) COMMENT '类型',
+  object_id BIGINT(20) COMMENT '类型 id',
+  problem_id BIGINT(20) COMMENT '问题 id',
+  student_id BIGINT(20) COMMENT '学生 id'
+);
+CREATE TABLE exam
+(
+  id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  lesson_id BIGINT(20) COMMENT '课程 id',
+  name VARCHAR(64) COMMENT '考试名称',
+  create_time DATETIME COMMENT '创建时间',
+  start_time DATETIME COMMENT '考试开始时间',
+  end_time DATETIME COMMENT '考试结束时间',
+  status TINYINT(4) COMMENT '状态'
+);
+CREATE TABLE exercise
+(
+  id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  chapter_id BIGINT(20) COMMENT '章节 id',
+  name VARCHAR(64) COMMENT '练习名称',
+  create_time DATETIME COMMENT '创建时间'
+);
 CREATE TABLE file
 (
   id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -46,6 +74,24 @@ CREATE TABLE lesson_content
   order_number BIGINT(20) COMMENT '排序',
   study_star_score BIGINT(20) COMMENT '学习之星分数'
 );
+CREATE TABLE lesson_note
+(
+  id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  lesson_content_id BIGINT(20) COMMENT '学习内容 id',
+  content VARCHAR(512) COMMENT '笔记',
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
+);
+CREATE TABLE problem
+(
+  id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  content VARCHAR(512) COMMENT '问题',
+  score TINYINT(4) COMMENT '分数',
+  answer VARCHAR(512) COMMENT '答案',
+  type TINYINT(4) COMMENT '类型',
+  object_id BIGINT(20) COMMENT '类型 id',
+  order_number TINYINT(4) COMMENT '排序',
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
+);
 CREATE TABLE student
 (
   id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -65,6 +111,23 @@ CREATE TABLE student_lesson_ref
   create_time DATETIME COMMENT '创建时间',
   update_time DATETIME COMMENT '更新时间'
 );
+CREATE TABLE study_record
+(
+  id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  student_id BIGINT(20) COMMENT '学生 id',
+  lesson_id BIGINT(20) COMMENT '课程 id',
+  type TINYINT(4) COMMENT '产生积分类型',
+  object_id BIGINT(20) COMMENT '对象 id',
+  study_star_score BIGINT(20) COMMENT '学习积分',
+  create_time DATETIME COMMENT '创建时间'
+);
+CREATE TABLE study_star_score
+(
+  id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  lesson_id BIGINT(20) COMMENT '课程 id',
+  type TINYINT(4) COMMENT '学习之星类型',
+  precent TINYINT(4) COMMENT '学习之星百分比'
+);
 CREATE TABLE teacher
 (
   id BIGINT(20) PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
@@ -82,67 +145,3 @@ CREATE TABLE usr_tokenid
   token_id BIGINT(20),
   create_time DATETIME
 );
-
-
-CREATE TABLE lesson_note(
-  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
-  lesson_content_id BIGINT COMMENT '学习内容 id',
-  content VARCHAR(512) COMMENT '笔记',
-  create_time DATETIME DEFAULT  now() COMMENT '创建时间'
-) COMMENT '课程笔记';
-
-
-
-CREATE TABLE `study_record` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `student_id` bigint(20) DEFAULT NULL COMMENT '学生 id',
-  `lesson_id` bigint(20) DEFAULT NULL COMMENT '课程 id',
-  `type` tinyint(4) DEFAULT NULL COMMENT '产生积分类型',
-  `object_id` bigint(20) DEFAULT NULL COMMENT '对象 id',
-  `study_star_score` bigint(20) DEFAULT NULL COMMENT '学习积分',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`)
-
-CREATE TABLE problem(
-  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
-  content VARCHAR(512) COMMENT '问题',
-  score TINYINT COMMENT '分数',
-  answer VARCHAR(512) COMMENT '答案',
-  type TINYINT COMMENT '类型',
-  object_id BIGINT COMMENT '类型 id',
-  order_number TINYINT COMMENT '排序',
-  create_time DATETIME DEFAULT now() COMMENT '创建时间'
-) COMMENT '题库';
-
-CREATE TABLE answer(
-  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
-  content VARCHAR(512) COMMENT '回答内容',
-  score TINYINT COMMENT '分数',
-  type TINYINT COMMENT '类型',
-  object_id BIGINT COMMENT '类型 id',
-  problem_id BIGINT COMMENT '问题 id',
-  student_id TINYINT COMMENT '学生 id'
-) COMMENT '回答';
-
-CREATE TABLE exam (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
-  lesson_id BIGINT COMMENT '课程 id',
-  name VARCHAR(64) COMMENT '考试名称',
-  create_time DATETIME COMMENT '创建时间',
-  during_time INT COMMENT '考试时间',
-  status TINYINT COMMENT '状态'
-) COMMENT '考试';
-
-CREATE  TABLE exercise(
-  id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
-  chapter_id BIGINT COMMENT '章节 id',
-  name VARCHAR(64) COMMENT '练习名称',
-  create_time DATETIME COMMENT '创建时间'
-) COMMENT '练习';
-
-CREATE TABLE study_star_score(
-  id BIGINT PRIMARY KEY  AUTO_INCREMENT COMMENT 'id',
-  lesson_id BIGINT COMMENT '课程 id',
-  type TINYINT COMMENT '学习之星类型',
-  precent TINYINT COMMENT '学习之星百分比'
-)COMMENT '学习之星配置';

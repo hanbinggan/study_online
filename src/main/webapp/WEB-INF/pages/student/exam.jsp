@@ -66,7 +66,7 @@
                     <td><fmt:formatDate value="${exam.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                     <td>
                         <c:if test="${exam.lessonId eq 1}">
-                            <a href="<%=path%>/student/lesson/exam/answer?id=${exam.id}">查看回答</a>
+                            <a href="<%=path%>/student/lesson/problem/answer?id=${exam.id}&type=exam">查看回答</a>
                         </c:if>
                         <c:if test="${exam.lessonId eq 0}">
                             <a href="<%=path%>/student/lesson/exam/join?id=${exam.id}">参加考试</a>

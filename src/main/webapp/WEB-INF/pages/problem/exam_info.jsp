@@ -16,7 +16,7 @@
 <jsp:include page="../left_bar.jsp"/>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="page-header">${student.name}--学习记录</h1>
+    <h1 class="page-header">学习记录</h1>
     <h3 class="sub-header"><a href="/lesson/exam?id=${lesson.id}">${lesson.name}</a>--考试详情
     </h3>
     <div class="row placeholders">
