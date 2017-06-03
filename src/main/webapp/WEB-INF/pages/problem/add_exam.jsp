@@ -31,14 +31,14 @@
             <div class="form-group">
                 <label for="start_time" class="col-sm-2 control-label">考试开始时间</label>
                 <div class="col-sm-5">
-                    <input name="startTime" class="form-control" type="text" id="start_time"/>
+                    <input name="startTime" class="form-control" type="text" id="start_time" placeholder="2017-01-01 01:01:01"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="end_time" class="col-sm-2 control-label">考试结束时间</label>
                 <div class="col-sm-5">
-                    <input name="endTime" class="form-control" type="text" id="end_time"/>
+                    <input name="endTime" class="form-control" type="text" id="end_time" placeholder="2017-01-01 01:01:01"/>
                 </div>
             </div>
 

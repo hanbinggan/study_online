@@ -195,7 +195,7 @@ public class StudyRecordController {
             public int compare(Map<String, Object> o1, Map<String, Object> o2) {
                 Long s1 = (Long)o1.get("score");
                 Long s2 = (Long)o2.get("score");
-                return (int)(s1-s2);
+                return (int)(s2-s1);
             }
         });
 
