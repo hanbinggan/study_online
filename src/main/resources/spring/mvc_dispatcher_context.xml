@@ -18,6 +18,7 @@
             <mvc:exclude-mapping path="/resources/**"/>
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="/manage/login"/>
+            <mvc:exclude-mapping path="/register"/>
             <bean class="cn.edu.upc.study_online.filter.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

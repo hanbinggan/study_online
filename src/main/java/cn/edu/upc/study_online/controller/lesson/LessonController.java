@@ -3,8 +3,10 @@ package cn.edu.upc.study_online.controller.lesson;
 import cn.edu.upc.study_online.controller.vo.LessonVo;
 import cn.edu.upc.study_online.dao.dao.LessonChapterDao;
 import cn.edu.upc.study_online.dao.dao.LessonDao;
+import cn.edu.upc.study_online.dao.dao.StudentLessonRefDao;
 import cn.edu.upc.study_online.dao.object.LessonChapterDo;
 import cn.edu.upc.study_online.dao.object.LessonDo;
+import cn.edu.upc.study_online.dao.object.StudentLessonRefDo;
 import cn.edu.upc.study_online.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +36,9 @@ public class LessonController {
 
     @Autowired
     private LessonService lessonService;
+
+    @Autowired
+    private StudentLessonRefDao studentLessonRefDao;
 
     @RequestMapping(value = "")
     public String lesson(Model model,
@@ -58,10 +65,6 @@ public class LessonController {
     public String addLesson(@ModelAttribute(value = "lesson") LessonDo lessonDo
             , HttpServletRequest request
             , Model model) {
-        if (lessonDo.getStudyStarScore() < 0) {
-            model.addAttribute("warning", "课程分数错误");
-            return "lesson/add_lesson";
-        }
         Map<String, Object> user = (Map<String, Object>) request.getSession().getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -99,8 +102,22 @@ public class LessonController {
     }
 
     @RequestMapping("/all")
-    public String allLesson(Model model){
+    public String allLesson(Model model, HttpServletRequest request) {
+        Map<String, Object> user = (Map<String, Object>) request.getSession().getAttribute("user");
+        Long studentId = (Long) user.get("id");
+        List<StudentLessonRefDo> studentLessonRefDoList = studentLessonRefDao.queryByStudent(studentId);
+        List<Long> lessonIds = new ArrayList<>();
+        for (StudentLessonRefDo studentLessonRefDo : studentLessonRefDoList) {
+            lessonIds.add(studentLessonRefDo.getLessonId());
+        }
         List<LessonVo> lessonVoList = lessonService.getAllLesson();
+        Iterator<LessonVo> lessonVoIterator = lessonVoList.iterator();
+        while (lessonVoIterator.hasNext()) {
+            LessonVo lessonVo = lessonVoIterator.next();
+            if (lessonIds.contains(lessonVo.getId())) {
+                lessonVoIterator.remove();
+            }
+        }
         model.addAttribute("lesson_list", lessonVoList);
         return "student/lesson_list";
     }

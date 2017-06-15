@@ -159,7 +159,7 @@ public class StudyRecordController {
             studentList.add(student);
 
             Long studentId = studentLessonRefDo.getStudentId();
-            Long totalScore = 0L;
+            Double totalScore = 0d;
             Long studyScore = 0L;
             Long exerciseScore = 0L;
             Long examScore = 0L;
@@ -177,11 +177,11 @@ public class StudyRecordController {
             }
 
 
-            totalScore = (long) (1.0 * (studyScore * studyStarScoreDo.getPrecent() +
+            totalScore = 1.0 * (studyScore * studyStarScoreDo.getPrecent() +
                     exerciseScore * exerciseStarScoreDo.getPrecent() +
                     examScore * examStarScoreDo.getPrecent()) /
                     (studyStarScoreDo.getPrecent() + exerciseStarScoreDo.getPrecent() +
-                            examStarScoreDo.getPrecent()));
+                            examStarScoreDo.getPrecent());
             StudentDo studentDo =studentDao.queryById(studentId);
             if(studentDo != null){
                 student.put("name", studentDo.getName());
@@ -193,16 +193,16 @@ public class StudyRecordController {
         studentList.sort(new Comparator<Map<String, Object>>() {
             @Override
             public int compare(Map<String, Object> o1, Map<String, Object> o2) {
-                Long s1 = (Long)o1.get("score");
-                Long s2 = (Long)o2.get("score");
-                return (int)(s2-s1);
+                Double s1 = (Double) o1.get("score");
+                Double s2 = (Double) o2.get("score");
+                return (int)((s2-s1)*1000);
             }
         });
 
         int cnt = 0;
-        Long last_score = -1L;
+        Double last_score = -1D;
         for(Map<String,Object> student: studentList){
-            Long score = (Long) student.get("score");
+            Double score = (Double) student.get("score");
             if (!last_score.equals(score)){
                 cnt++;
             }

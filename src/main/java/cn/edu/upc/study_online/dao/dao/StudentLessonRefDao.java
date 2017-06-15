@@ -2,6 +2,7 @@ package cn.edu.upc.study_online.dao.dao;
 
 import cn.edu.upc.study_online.dao.mapper.StudentLessonRefMapper;
 import cn.edu.upc.study_online.dao.object.StudentLessonRefDo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -42,4 +43,9 @@ public class StudentLessonRefDao {
     public StudentLessonRefDo queryByStudentLesson(Long studentId, Long lessonId) {
         return studentLessonRefMapper.queryByStudentLesson(studentId, lessonId);
     }
+
+    public List<StudentLessonRefDo> queryByStudent(Long studentId){
+        return studentLessonRefMapper.queryByStudent(studentId);
+    }
+
 }

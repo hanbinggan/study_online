@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: songqiaolin
@@ -10,17 +11,13 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/lesson">课程 <span class="sr-only">(current)</span></a></li>
-                <li><a href="/lesson/all">参加课程</a></li>
-                <li><a href="/student/lesson">课程管理</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">考试</a></li>
-                <li><a href="">参加考试</a></li>
-                <li><a href="">考试管理</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">练习</a></li>
+                <c:if test="${sessionScope.user['role'] eq 'teacher'}">
+                    <li><a href="/lesson">课程 <span class="sr-only">(current)</span></a></li>
+                </c:if>
+                <c:if test="${sessionScope.user['role'] eq 'student'}">
+                    <li><a href="/lesson/all">参加课程</a></li>
+                    <li><a href="/student/lesson">课程管理</a></li>
+                </c:if>
             </ul>
         </div>
     </div>

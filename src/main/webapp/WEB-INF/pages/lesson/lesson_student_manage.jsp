@@ -24,7 +24,7 @@
             <thead>
             <tr>
                 <th>学生</th>
-                <th>学习之星分数</th>
+                <%--<th>学习之星分数</th>--%>
                 <th>加入时间</th>
             </tr>
             </thead>
@@ -32,7 +32,7 @@
             <c:forEach items="${applied_lesson}" var="lesson">
                 <tr>
                     <td><a href="/study/record?id=${lesson.studentId}&lesson_id=${lesson.lessonId}">${lesson.studentName}</a></td>
-                    <td>10</td>
+                    <%--<td>10</td>--%>
                     <td><fmt:formatDate value="${lesson.createTime}"/></td>
                 </tr>
             </c:forEach>
@@ -56,7 +56,10 @@
                 <tr>
                     <td>${lesson.studentName}</td>
                     <td><fmt:formatDate value="${lesson.createTime}"/></td>
-                    <td><a href="/lesson/join?lesson_id=${lesson.lessonId}&student_id=${lesson.studentId}">同意加入课程</a> </td>
+                    <td>
+                        <a href="/lesson/join?lesson_id=${lesson.lessonId}&student_id=${lesson.studentId}">同意加入课程</a>
+                        /<a href="/lesson/reject?lesson_id=${lesson.lessonId}&student_id=${lesson.studentId}">拒绝加入课程</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

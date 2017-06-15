@@ -76,33 +76,6 @@
         </table>
     </div>
 
-    <h3 class="sub-header">已结束
-    </h3>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>课程</th>
-                <th>老师</th>
-                <th>描述</th>
-                <th>创建时间</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${finished_lesson}" var="lesson">
-                <tr>
-                    <td>${lesson.id}</td>
-                    <td><a href="<%=path%>/lesson/info?id=${lesson.id}">${lesson.name}</a></td>
-                    <td>${lesson.teacherName}</td>
-                    <td>${lesson.description}</td>
-                    <td><fmt:formatDate value="${lesson.createTime}"/></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-
     <h3 class="sub-header">被驳回
     </h3>
     <div class="table-responsive">

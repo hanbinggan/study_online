@@ -133,4 +133,10 @@ public class AuthController {
         return "login";
     }
 
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return "redirect:/login";
+    }
 }

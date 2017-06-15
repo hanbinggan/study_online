@@ -23,7 +23,7 @@
                    action="/lesson/chapter/exercise/add">
             <form:input path="chapterId" type="hidden"/>
             <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">课程章节名</label>
+                <label for="name" class="col-sm-2 control-label">练习名称</label>
                 <div class="col-sm-5">
                     <form:input path="name" type="text" class="form-control" id="name"
                                 value="${name}"/>

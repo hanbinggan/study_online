@@ -40,7 +40,9 @@
                     <td><a href="<%=path%>/study/record?id=${student.student_id}&lesson_id=${lesson.id}">
                         ${student.name}</a>
                     </td>
-                    <td>${student.score}</td>
+                    <td>
+                        <fmt:formatNumber type="number" maxFractionDigits="2" value="${student.score}" />
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

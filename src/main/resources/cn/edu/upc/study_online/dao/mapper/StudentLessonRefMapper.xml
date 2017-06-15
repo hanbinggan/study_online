@@ -37,6 +37,7 @@
         SET
         status=#{status, jdbcType=TINYINT},
         update_time=now()
+        where id=#{id, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">
@@ -74,5 +75,12 @@
         FROM student_lesson_ref
         WHERE student_id=#{studentId, jdbcType=BIGINT}
           AND lesson_id=#{lessonId, jdbcType=BIGINT}
+    </select>
+
+    <select id="queryByStudent" resultMap="BaseResultMap" resultType="java.util.List">
+        SELECT
+        <include refid="BaseColumnList"/>
+        FROM student_lesson_ref
+        WHERE student_id=#{studentId, jdbcType=BIGINT}
     </select>
 </mapper>

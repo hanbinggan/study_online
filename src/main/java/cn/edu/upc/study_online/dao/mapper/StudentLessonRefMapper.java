@@ -21,6 +21,8 @@ public interface StudentLessonRefMapper {
 
     List<StudentLessonRefDo> queryByStudentStatus(@Param("studentId") Long studentId, @Param("status")Integer status);
 
+    List<StudentLessonRefDo> queryByStudent(@Param("studentId") Long studentId);
+
     List<StudentLessonRefDo> queryByLessonStatus(@Param("lessonId") Long lessonId, @Param("status") Integer status);
 
     StudentLessonRefDo queryByStudentLesson(@Param("studentId") Long studentId, @Param("lessonId") Long lessonId);

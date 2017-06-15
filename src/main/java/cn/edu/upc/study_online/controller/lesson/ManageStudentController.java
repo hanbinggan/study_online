@@ -52,4 +52,14 @@ public class ManageStudentController {
         return student(lessonId, model);
     }
 
+
+    @RequestMapping("/reject")
+    public String rejectStudent(@RequestParam("student_id") Long studentId,
+                          @RequestParam("lesson_id") Long lessonId,
+                          Model model){
+        StudentLessonRefDo studentLessonRefDo = studentLessonRefDao.queryByStudentLesson(studentId, lessonId);
+        studentLessonRefDo.setStatus(StudentLessonRefDo.STATUS.reject.getValue());
+        studentLessonRefDao.update(studentLessonRefDo);
+        return student(lessonId, model);
+    }
 }
